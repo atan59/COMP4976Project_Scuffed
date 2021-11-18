@@ -2,6 +2,14 @@
 
 namespace SportsThemesBackend.Models
 {
+    public enum FontSize
+    {
+        XLarge,
+        Large,
+        Medium,
+        Small,
+        XSmall
+    }
     public class Theme
     {
         [Key]
@@ -19,7 +27,7 @@ namespace SportsThemesBackend.Models
         public int LinkOpacity { get; set; }
 
         public string Font { get; set; }
-        public int FontSize { get; set; }
+        public FontSize FontSize { get; set; }
 
         public string Logo { get; set; }
     }

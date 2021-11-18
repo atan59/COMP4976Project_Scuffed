@@ -20,7 +20,12 @@
       "ProjectGuid": "1903a301-bd4c-4d3d-83ac-444d3cb5012e",
       "DisplayName": "SportsThemesBackend",
       "ColorIndex": 2
+    },
+    "ab969b31-3f7c-43af-8b41-c0d9bb43eab5": {
+      "ProjectGuid": "ab969b31-3f7c-43af-8b41-c0d9bb43eab5",
+      "DisplayName": "SportsThemesBackend",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }
