@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsThemesAPI", "SportsThemesAPI\SportsThemesAPI.csproj", "{318FE846-5F82-4200-A5E2-74709F08F9C5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsThemesReact", "SportsThemesReact\SportsThemesReact.csproj", "{A79CD445-585B-4710-BA89-25469561363E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsThemesBackend", "SportsThemesBackend\SportsThemesBackend.csproj", "{1903A301-BD4C-4D3D-83AC-444D3CB5012E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsThemesBackend", "SportsThemesBackend\SportsThemesBackend.csproj", "{AB969B31-3F7C-43AF-8B41-C0D9BB43EAB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{318FE846-5F82-4200-A5E2-74709F08F9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{318FE846-5F82-4200-A5E2-74709F08F9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{318FE846-5F82-4200-A5E2-74709F08F9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{318FE846-5F82-4200-A5E2-74709F08F9C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A79CD445-585B-4710-BA89-25469561363E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A79CD445-585B-4710-BA89-25469561363E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A79CD445-585B-4710-BA89-25469561363E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A79CD445-585B-4710-BA89-25469561363E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1903A301-BD4C-4D3D-83AC-444D3CB5012E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1903A301-BD4C-4D3D-83AC-444D3CB5012E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1903A301-BD4C-4D3D-83AC-444D3CB5012E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1903A301-BD4C-4D3D-83AC-444D3CB5012E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB969B31-3F7C-43AF-8B41-C0D9BB43EAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB969B31-3F7C-43AF-8B41-C0D9BB43EAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB969B31-3F7C-43AF-8B41-C0D9BB43EAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB969B31-3F7C-43AF-8B41-C0D9BB43EAB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
