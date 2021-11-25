@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SportsThemesBackend.Models.Team>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coach.CoachName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theme.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Coach.CoachName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Theme.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TeamName">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TeamName">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TeamName">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

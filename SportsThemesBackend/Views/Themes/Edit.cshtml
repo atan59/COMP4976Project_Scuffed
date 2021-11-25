@@ -1,0 +1,79 @@
+﻿@model SportsThemesBackend.Models.Theme
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Theme</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyColour" class="control-label"></label>
+                <input asp-for="BodyColour" class="form-control" />
+                <span asp-validation-for="BodyColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextColour" class="control-label"></label>
+                <input asp-for="TextColour" class="form-control" />
+                <span asp-validation-for="TextColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ButtonTextColour" class="control-label"></label>
+                <input asp-for="ButtonTextColour" class="form-control" />
+                <span asp-validation-for="ButtonTextColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ButtonBackgroundColour" class="control-label"></label>
+                <input asp-for="ButtonBackgroundColour" class="form-control" />
+                <span asp-validation-for="ButtonBackgroundColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinkTextColour" class="control-label"></label>
+                <input asp-for="LinkTextColour" class="form-control" />
+                <span asp-validation-for="LinkTextColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinkOpacity" class="control-label"></label>
+                <input asp-for="LinkOpacity" class="form-control" />
+                <span asp-validation-for="LinkOpacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Font" class="control-label"></label>
+                <input asp-for="Font" class="form-control" />
+                <span asp-validation-for="Font" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FontSize" class="control-label"></label>
+                <select asp-for="FontSize" asp-items="Html.GetEnumSelectList<FontSize>()"></select>
+                <span asp-validation-for="FontSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Logo" class="control-label"></label>
+                <input asp-for="Logo" class="form-control" />
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

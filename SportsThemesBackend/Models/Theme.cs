@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SportsThemesBackend.Models
@@ -14,25 +15,29 @@ namespace SportsThemesBackend.Models
     public class Theme
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [DefaultValue("My Theme")]
         [Display(Name = "Theme Name")]
-        [MaxLength()]
+        [MaxLength(100)]
         public string Name { get; set; }
+
         [Required]
         [DefaultValue("#F0F8FF")]
         [Display(Name = "Body Colour")]
         public string BodyColour { get; set; }
+
         [Required]
         [DefaultValue("#000000")]
         [Display(Name = "Text Colour")]
         public string TextColour { get; set; }
+
         [Required]
         [DefaultValue("#5F9EA0")]
         [Display(Name = "Button Text Colour")]
         public string ButtonTextColour { get; set; }
+
         [Required]
         [DefaultValue("#6495ED")]
         [Display(Name = "Button Background Colour")]
@@ -42,6 +47,7 @@ namespace SportsThemesBackend.Models
         [DefaultValue("#DC143C")]
         [Display(Name = "Link Text Colour")]
         public string LinkTextColour { get; set; }
+
         [Required]
         [DefaultValue(50)]
         [Display(Name = "Link Opacity")]
@@ -51,6 +57,7 @@ namespace SportsThemesBackend.Models
         [DefaultValue("Helvetica")]
         [Display(Name = "Font Name")]
         public string Font { get; set; }
+
         [Required]
         [DefaultValue(FontSize.Medium)]
         [Display(Name = "Font Size")]
