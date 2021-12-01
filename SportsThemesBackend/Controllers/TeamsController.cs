@@ -23,15 +23,13 @@ namespace SportsThemesBackend.Controllers
         // GET: Teams
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Theme);
+            var applicationDbContext = _context.Teams;
 
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Teams/Details/5
-        public async Task<IActionResult> Details(string? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -39,8 +37,6 @@ namespace SportsThemesBackend.Controllers
             }
 
             var team = await _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Theme)
                 .FirstOrDefaultAsync(m => m.TeamName == id);
 
             if (team == null)
@@ -64,18 +60,8 @@ namespace SportsThemesBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string CoachId, Guid ThemeId, [Bind("TeamName, City, CoachId, ThemeId")] Team team)
+        public async Task<IActionResult> Create([Bind("TeamName, City, CoachId, ThemeId")] Team team)
         {
-            var coach = await _context.Coaches
-                .FirstOrDefaultAsync(c => c.CoachId == CoachId);
-
-            team.Coach = coach;
-
-            var theme = await _context.Themes
-               .FirstOrDefaultAsync(t => t.Id == ThemeId);
-
-            team.Theme = theme;
-
             if (ModelState.IsValid)
             {
                 _context.Add(team);
@@ -86,7 +72,7 @@ namespace SportsThemesBackend.Controllers
         }
 
         // GET: Teams/Edit/5
-        public async Task<IActionResult> Edit(string? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -94,8 +80,6 @@ namespace SportsThemesBackend.Controllers
             }
 
             var team = await _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Theme)
                 .FirstOrDefaultAsync(t => t.TeamName == id);
 
             if (team == null)
@@ -114,22 +98,12 @@ namespace SportsThemesBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, string coachId, Guid themeId, [Bind("TeamName, City, CoachId, ThemeId")] Team team)
+        public async Task<IActionResult> Edit(string id, [Bind("TeamName, City, CoachId, ThemeId")] Team team)
         {
             if (id != team.TeamName)
             {
                 return NotFound();
             }
-
-            var coach = await _context.Coaches
-                .FirstOrDefaultAsync(c => c.CoachId == coachId);
-
-            team.Coach = coach;
-
-            var theme = await _context.Themes
-               .FirstOrDefaultAsync(t => t.Id == themeId);
-
-            team.Theme = theme;
 
             if (ModelState.IsValid)
             {
@@ -155,7 +129,7 @@ namespace SportsThemesBackend.Controllers
         }
 
         // GET: Teams/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -163,8 +137,6 @@ namespace SportsThemesBackend.Controllers
             }
 
             var team = await _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Theme)
                 .FirstOrDefaultAsync(m => m.TeamName == id);
 
             if (team == null)

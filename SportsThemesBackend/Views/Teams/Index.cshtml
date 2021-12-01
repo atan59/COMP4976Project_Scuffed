@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Coach.CoachName)
+                @Html.DisplayNameFor(model => model.CoachId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Theme.Name)
+                @Html.DisplayNameFor(model => model.ThemeId)
             </th>
             <th></th>
         </tr>
@@ -38,10 +38,10 @@
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Coach.CoachName)
+                    @Html.DisplayFor(modelItem => item.CoachId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Theme.Name)
+                    @Html.DisplayFor(modelItem => item.ThemeId)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TeamName">Edit</a> |

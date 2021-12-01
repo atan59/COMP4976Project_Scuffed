@@ -24,9 +24,6 @@ namespace SportsThemesBackend.Models
         [Display(Name = "Coach Id")]
         public string CoachId { get; set; }
 
-        [ForeignKey("CoachId")]
-        public Coach Coach { get; set; }
-
         [Display(Name = "Theme Id")]
         public Guid ThemeId { get; set; }
 

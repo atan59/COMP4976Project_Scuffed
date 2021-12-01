@@ -28,8 +28,6 @@ namespace SportsThemesBackend.Controllers.api
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
             return await _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Players)
                 .ToListAsync();
         }
 
@@ -38,8 +36,6 @@ namespace SportsThemesBackend.Controllers.api
         public async Task<ActionResult<Team>> GetTeam(string id)
         {
             var team = await _context.Teams
-                .Include(t => t.Coach)
-                .Include(t => t.Players)
                 .FirstOrDefaultAsync(t => t.TeamName == id);
 
             if (team == null)

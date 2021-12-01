@@ -28,7 +28,6 @@ namespace SportsThemesBackend.Controllers.api
         public async Task<ActionResult<IEnumerable<Score>>> GetScores()
         {
             return await _context.Scores
-                .Include(s => s.Player)
                 .ToListAsync();
         }
 
@@ -37,7 +36,6 @@ namespace SportsThemesBackend.Controllers.api
         public async Task<ActionResult<Score>> GetScore(Guid id)
         {
             var score = await _context.Scores
-                .Include(s => s.Player)
                 .FirstOrDefaultAsync(c => c.ScoreId == id);
 
             if (score == null)
