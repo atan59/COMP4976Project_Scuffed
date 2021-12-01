@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportsThemesBackend.Data;
 using SportsThemesBackend.Models;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace SportsThemesBackend.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ThemesController : Controller
     {
         private readonly ApplicationDbContext _context;

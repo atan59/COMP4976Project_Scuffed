@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SportsThemesBackend.Data;
@@ -45,6 +46,7 @@ namespace SportsThemesBackend.Controllers.api
         // PUT: api/Themes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutTheme(Guid id, Theme theme)
         {
             if (id != theme.Id)
@@ -76,6 +78,7 @@ namespace SportsThemesBackend.Controllers.api
         // POST: api/Themes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Theme>> PostTheme(Theme theme)
         {
             _context.Themes.Add(theme);
@@ -86,6 +89,7 @@ namespace SportsThemesBackend.Controllers.api
 
         // DELETE: api/Themes/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTheme(Guid id)
         {
             var theme = await _context.Themes.FindAsync(id);

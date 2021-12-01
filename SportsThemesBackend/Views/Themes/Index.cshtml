@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -53,9 +50,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
@@ -83,7 +77,7 @@
                     @Html.DisplayFor(modelItem => item.FontSize)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Logo)
+                    <img style="width: 100px" src="@Url.Content(item.Logo)">
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

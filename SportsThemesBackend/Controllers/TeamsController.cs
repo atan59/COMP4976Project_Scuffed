@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportsThemesBackend.Data;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SportsThemesBackend.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TeamsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,7 +25,7 @@ namespace SportsThemesBackend.Controllers
         {
             var applicationDbContext = _context.Teams
                 .Include(t => t.Coach)
-                .Include(t => t.Players);
+                .Include(t => t.Theme);
 
             return View(await applicationDbContext.ToListAsync());
         }
@@ -38,7 +40,7 @@ namespace SportsThemesBackend.Controllers
 
             var team = await _context.Teams
                 .Include(t => t.Coach)
-                .Include(t => t.Players)
+                .Include(t => t.Theme)
                 .FirstOrDefaultAsync(m => m.TeamName == id);
 
             if (team == null)
@@ -62,15 +64,15 @@ namespace SportsThemesBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string coachId, Guid themeId, [Bind("TeamName, City, CoachId, ThemeId")] Team team)
+        public async Task<IActionResult> Create(string CoachId, Guid ThemeId, [Bind("TeamName, City, CoachId, ThemeId")] Team team)
         {
             var coach = await _context.Coaches
-                .FirstOrDefaultAsync(c => c.CoachId == coachId);
+                .FirstOrDefaultAsync(c => c.CoachId == CoachId);
 
             team.Coach = coach;
 
             var theme = await _context.Themes
-               .FirstOrDefaultAsync(t => t.Id == themeId);
+               .FirstOrDefaultAsync(t => t.Id == ThemeId);
 
             team.Theme = theme;
 
