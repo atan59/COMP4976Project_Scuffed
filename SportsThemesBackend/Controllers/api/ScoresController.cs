@@ -12,6 +12,7 @@ namespace SportsThemesBackend.Controllers.api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public class ScoresController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
