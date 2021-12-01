@@ -32,6 +32,7 @@ namespace SportsThemesBackend.Controllers.api
         }
 
         // GET: api/Themes/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<Theme>> GetTheme(Guid id)
         {
             var theme = await _context.Themes
