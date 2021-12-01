@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import classes from './Home.module.css';
+import classes from '../HomeComponents/Home.module.css';
  
 const TeamContainer = (selectedTheme) => {
     console.log(selectedTheme, "<== team container")

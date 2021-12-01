@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import instance from '../Assests/Axios/AxiosInstance';
+import instance from '../../Assests/Axios/AxiosInstance';
 import classes from './Home.module.css';
 import WebFont from 'webfontloader';
-import TeamContainer from './TeamContainer';
+import TeamContainer from '../TeamContainer/TeamContainer';
 import _ from 'lodash';
  
  
