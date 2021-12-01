@@ -33,6 +33,7 @@ namespace SportsThemesBackend.Controllers.api
         }
 
         // GET: api/Scores/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<Score>> GetScore(Guid id)
         {
             var score = await _context.Scores

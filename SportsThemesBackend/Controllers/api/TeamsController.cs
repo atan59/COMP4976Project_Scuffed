@@ -34,6 +34,7 @@ namespace SportsThemesBackend.Controllers.api
         }
 
         // GET: api/Teams/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(string id)
         {
             var team = await _context.Teams
