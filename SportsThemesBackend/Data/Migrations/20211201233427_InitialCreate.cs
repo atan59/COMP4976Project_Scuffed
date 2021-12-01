@@ -63,6 +63,48 @@ namespace SportsThemesBackend.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PlayerName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Position = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TeamName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => x.PlayerId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    ScoreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GameName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PlayerScore = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.ScoreId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    TeamName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoachId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThemeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.TeamName);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Themes",
                 columns: table => new
                 {
@@ -189,102 +231,19 @@ namespace SportsThemesBackend.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Teams",
-                columns: table => new
-                {
-                    TeamName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoachId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ThemeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teams", x => x.TeamName);
-                    table.ForeignKey(
-                        name: "FK_Teams_Coaches_CoachId",
-                        column: x => x.CoachId,
-                        principalTable: "Coaches",
-                        principalColumn: "CoachId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Teams_Themes_Id",
-                        column: x => x.Id,
-                        principalTable: "Themes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlayerName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Position = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TeamName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Players", x => x.PlayerId);
-                    table.ForeignKey(
-                        name: "FK_Players_Teams_TeamName",
-                        column: x => x.TeamName,
-                        principalTable: "Teams",
-                        principalColumn: "TeamName",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Scores",
-                columns: table => new
-                {
-                    ScoreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GameName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PlayerScore = table.Column<int>(type: "int", nullable: false),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scores", x => x.ScoreId);
-                    table.ForeignKey(
-                        name: "FK_Scores_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "PlayerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Coaches",
                 columns: new[] { "CoachId", "CoachName" },
                 values: new object[] { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble" });
 
             migrationBuilder.InsertData(
-                table: "Themes",
-                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "FontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000" });
-
-            migrationBuilder.InsertData(
-                table: "Themes",
-                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "FontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000" });
-
-            migrationBuilder.InsertData(
-                table: "Teams",
-                columns: new[] { "TeamName", "City", "CoachId", "Id", "ThemeId" },
-                values: new object[] { "Test Team 1", "Vancouver", "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", null, new Guid("00000000-0000-0000-0000-000000000000") });
-
-            migrationBuilder.InsertData(
                 table: "Players",
                 columns: new[] { "PlayerId", "PlayerName", "Position", "TeamName" },
-                values: new object[] { "a29e2769-5e6b-4312-bda3-7f861490a85c", "Bambam Rubble", "Test Position 1", "Test Team 1" });
-
-            migrationBuilder.InsertData(
-                table: "Players",
-                columns: new[] { "PlayerId", "PlayerName", "Position", "TeamName" },
-                values: new object[] { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" });
+                values: new object[,]
+                {
+                    { "a29e2769-5e6b-4312-bda3-7f861490a85c", "Bambam Rubble", "Test Position 1", "Test Team 1" },
+                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Scores",
@@ -295,6 +254,20 @@ namespace SportsThemesBackend.Data.Migrations
                     { new Guid("00000000-0000-0000-0000-000000000002"), "Test Game 2", "a29e2769-5e6b-4312-bda3-7f861490a85c", 10 },
                     { new Guid("00000000-0000-0000-0000-000000000003"), "Test Game 1", "e53b635b-6c9f-414f-9c37-b8f33a0e953d", 15 },
                     { new Guid("00000000-0000-0000-0000-000000000004"), "Test Game 2", "e53b635b-6c9f-414f-9c37-b8f33a0e953d", 10 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Teams",
+                columns: new[] { "TeamName", "City", "CoachId", "ThemeId" },
+                values: new object[] { "Test Team 1", "Vancouver", "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", new Guid("00000000-0000-0000-0000-000000000000") });
+
+            migrationBuilder.InsertData(
+                table: "Themes",
+                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "FontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour" },
+                values: new object[,]
+                {
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000" },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -335,26 +308,6 @@ namespace SportsThemesBackend.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Players_TeamName",
-                table: "Players",
-                column: "TeamName");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Scores_PlayerId",
-                table: "Scores",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teams_CoachId",
-                table: "Teams",
-                column: "CoachId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teams_Id",
-                table: "Teams",
-                column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -375,25 +328,25 @@ namespace SportsThemesBackend.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Coaches");
+
+            migrationBuilder.DropTable(
+                name: "Players");
+
+            migrationBuilder.DropTable(
                 name: "Scores");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
+
+            migrationBuilder.DropTable(
+                name: "Themes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Players");
-
-            migrationBuilder.DropTable(
-                name: "Teams");
-
-            migrationBuilder.DropTable(
-                name: "Coaches");
-
-            migrationBuilder.DropTable(
-                name: "Themes");
         }
     }
 }
