@@ -27,7 +27,5 @@ namespace SportsThemesBackend.Models
         [Display(Name = "Team Name")]
         [MaxLength(100)]
         public string TeamName { get; set; }
-
-        public List<Score> Scores { get; set; }
     }
 }

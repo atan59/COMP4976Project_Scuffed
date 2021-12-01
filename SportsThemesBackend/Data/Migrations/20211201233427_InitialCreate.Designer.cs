@@ -10,7 +10,7 @@ using SportsThemesBackend.Data;
 namespace SportsThemesBackend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211125220331_InitialCreate")]
+    [Migration("20211201233427_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace SportsThemesBackend.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.12");
+                .HasAnnotation("ProductVersion", "5.0.9");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -271,13 +271,10 @@ namespace SportsThemesBackend.Data.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("TeamName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("PlayerId");
-
-                    b.HasIndex("TeamName");
 
                     b.ToTable("Players");
 
@@ -311,14 +308,12 @@ namespace SportsThemesBackend.Data.Migrations
 
                     b.Property<string>("PlayerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PlayerScore")
                         .HasColumnType("int");
 
                     b.HasKey("ScoreId");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("Scores");
 
@@ -365,19 +360,12 @@ namespace SportsThemesBackend.Data.Migrations
 
                     b.Property<string>("CoachId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("Id")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ThemeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TeamName");
-
-                    b.HasIndex("CoachId");
-
-                    b.HasIndex("Id");
 
                     b.ToTable("Teams");
 
@@ -520,55 +508,6 @@ namespace SportsThemesBackend.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SportsThemesBackend.Models.Player", b =>
-                {
-                    b.HasOne("SportsThemesBackend.Models.Team", "Team")
-                        .WithMany("Players")
-                        .HasForeignKey("TeamName")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("SportsThemesBackend.Models.Score", b =>
-                {
-                    b.HasOne("SportsThemesBackend.Models.Player", "Player")
-                        .WithMany("Scores")
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("SportsThemesBackend.Models.Team", b =>
-                {
-                    b.HasOne("SportsThemesBackend.Models.Coach", "Coach")
-                        .WithMany()
-                        .HasForeignKey("CoachId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SportsThemesBackend.Models.Theme", "Theme")
-                        .WithMany()
-                        .HasForeignKey("Id");
-
-                    b.Navigation("Coach");
-
-                    b.Navigation("Theme");
-                });
-
-            modelBuilder.Entity("SportsThemesBackend.Models.Player", b =>
-                {
-                    b.Navigation("Scores");
-                });
-
-            modelBuilder.Entity("SportsThemesBackend.Models.Team", b =>
-                {
-                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }
