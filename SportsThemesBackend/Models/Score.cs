@@ -25,8 +25,5 @@ namespace SportsThemesBackend.Models
         [Required]
         [Display(Name = "Player Id")]
         public string PlayerId { get; set; }
-
-        [ForeignKey("PlayerId")]
-        public Player Player { get; set; }
     }
 }

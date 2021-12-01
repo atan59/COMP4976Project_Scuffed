@@ -30,9 +30,6 @@ namespace SportsThemesBackend.Models
         [Display(Name = "Theme Id")]
         public Guid ThemeId { get; set; }
 
-        [ForeignKey("Id")]
-        public Theme Theme { get; set; }
-
         public List<Player> Players { get; set; }
     }
 }

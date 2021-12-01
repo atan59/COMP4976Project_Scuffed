@@ -26,10 +26,7 @@ namespace SportsThemesBackend.Models
         [DefaultValue("My Team")]
         [Display(Name = "Team Name")]
         [MaxLength(100)]
-        public string? TeamName { get; set; }
-
-        [ForeignKey("TeamName")]
-        public Team Team { get; set; }
+        public string TeamName { get; set; }
 
         public List<Score> Scores { get; set; }
     }
