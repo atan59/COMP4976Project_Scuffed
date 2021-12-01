@@ -23,7 +23,6 @@ namespace SportsThemesBackend.Models
         [MaxLength(100)]
         public string Position { get; set; }
 
-        [Required]
         [DefaultValue("My Team")]
         [Display(Name = "Team Name")]
         [MaxLength(100)]
