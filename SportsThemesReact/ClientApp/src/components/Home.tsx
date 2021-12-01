@@ -1,23 +1,140 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react'
+import instance from '../Assets/Axios/AxiosInstance';
 import { connect } from 'react-redux';
+import styled, { ThemeProvider } from "styled-components";
+import WebFont from 'webfontloader';
+// import { GlobalStyles } from '../theme/GlobalStyles';
+// import { useTheme } from '../theme/useTheme';
+import TeamContainer from './TeamContainer';
+import _ from 'lodash';
 
-const Home = () => (
-  <div>
-    <h1>Hello, world!</h1>
-    <p>Welcome to your new single-page application, built with:</p>
-    <ul>
-      <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-      <li><a href='https://facebook.github.io/react/'>React</a> and <a href='https://redux.js.org/'>Redux</a> for client-side code</li>
-      <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-    </ul>
-    <p>To help you get started, we have also set up:</p>
-    <ul>
-      <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-      <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-      <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-    </ul>
-    <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-  </div>
-);
+
+const Home = () => {
+  const themes = {
+    "light" : {
+    "id": "T_001",
+    "name": "Light",
+    "colors": {
+        "body": "#FFFFFF",
+        "text": "#000000",
+        "button": {
+        "text": "#FFFFFF",
+        "background": "#000000"
+        },
+        "link": {
+        "text": "teal",
+        "opacity": 1
+        }
+    },
+    "font": "Tinos"
+    },
+    "seaWave" : {
+    "id": "T_007",
+    "name": "Sea Wave",
+    "colors": {
+        "body": "#9be7ff",
+        "text": "#0d47a1",
+        "button": {
+        "text": "#ffffff",
+        "background": "#0d47a1"
+        },
+        "link": {
+        "text": "#0d47a1",
+        "opacity": 0.8
+        }
+    },
+    "font": "Ubuntu"
+    }
+}
+const realTheme = {
+  "id": "00000000-0000-0000-0000-000000000002",
+  "name": "Test Theme 2",
+  "bodyColour": "#c0c0c0",
+  "textColour": "#fd7776",
+  "buttonTextColour": "#baaadd",
+  "buttonBackgroundColour": "#bae8c0",
+  "linkTextColour": "#15f4ee",
+  "linkOpacity": 50,
+  "font": "Helvetica",
+  "fontSize": 24,
+  "logo": "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930"
+}
+  // const {theme, themeLoaded, getFonts} = useTheme();
+  const [theme, setTheme] = useState(themes.seaWave)
+  const [themeLoaded, setThemeLoaded] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState(theme);
+  // const Container = styled.div`margin: 5px auto 5px auto;`;
+  const coachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a"; // HARDCODED THIS FOR NOW...
+
+  const getFonts = () => {
+    const allFonts = _.values(_.mapValues(themes, 'font'));
+    return allFonts;
+  }
+ 
+  useEffect(() => {
+      setSelectedTheme(theme);
+   }, [theme]);
+
+   useEffect(() => {
+    setThemeLoaded(true);
+   }, [selectedTheme])
+
+  // get coach OR player
+  useEffect(() => {
+    // TODO: add an if else statement, which user type is logged in, get coach or player depending on that (for now we'll do coach only)
+    instance.get(`https://localhost:5001/api/coaches/${coachId}`).then(res => { // TODO: make the coach id DYNAMIC on the one logged in
+        let response = res;
+        console.log(response, "<== response");
+    }).catch(err => {
+        console.log(err)
+    })
+  }, [])
+  
+  // get team
+  useEffect(() => {
+    instance.get(`https://localhost:5001/api/teams`).then(res => {
+        let response = res;
+        console.log(response, "<== response");
+    }).catch(err => {
+        console.log(err)
+    })
+  }, [])
+
+  // get theme
+
+// 4: Load all the fonts
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: getFonts()
+      }
+    });
+  });
+
+  console.log(themeLoaded, "<== themeLoaded");
+  console.log(selectedTheme, "<== selectedTheme");
+
+  // 5: Render if the theme is loaded.
+  return (
+    <div style={{backgroundColor: realTheme.bodyColour}}>
+    {
+      themeLoaded && 
+      // <ThemeProvider theme={ selectedTheme }>
+      //   <GlobalStyles/>
+      //   <Container style={{fontFamily: selectedTheme.font}}>
+      //     <h1>Theme Builder</h1>
+      //     <p>
+      //       This is a theming system with a Theme Switcher and Theme Builder.
+      //     </p>
+      //   </Container>
+      // </ThemeProvider>
+      <TeamContainer 
+        selectedTheme={realTheme}
+        teamName="Team Pepe"
+      />
+    }
+    </div>
+  );
+}
 
 export default connect()(Home);
