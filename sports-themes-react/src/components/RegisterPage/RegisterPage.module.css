@@ -1,0 +1,19 @@
+.registerContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.logoContainer {
+    width: 50vw;
+    height: 100vh;
+    background: red;
+}
+
+.formContainer {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+}

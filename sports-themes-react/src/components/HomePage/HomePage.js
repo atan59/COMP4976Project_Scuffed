@@ -3,7 +3,10 @@ import instance from '../../Assests/Axios/AxiosInstance';
 import classes from './HomePage.module.css';
 import WebFont from 'webfontloader';
 import TeamContainer from '../TeamContainer/TeamContainer';
+import { auth } from '../Firebase/Firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import _ from 'lodash';
+import { getFirebaseUserInfo, postCoachUser, postPlayerUser } from '../ApiActions/ApiActions';
 
 
 const HomePage = () => {
@@ -43,6 +46,7 @@ const HomePage = () => {
       "font": "Ubuntu"
     }
   }
+
   const realTheme = {
     "id": "00000000-0000-0000-0000-000000000002",
     "name": "Test Theme 2",
@@ -60,6 +64,8 @@ const HomePage = () => {
   const [theme, setTheme] = useState(themes.seaWave)
   const [themeLoaded, setThemeLoaded] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState(theme);
+  const [user] = useAuthState(auth);
+  const [userInfo, setUserInfo] = useState({});
   // const Container = styled.div`margin: 5px auto 5px auto;`;
   const coachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a"; // HARDCODED THIS FOR NOW...
 
@@ -67,6 +73,37 @@ const HomePage = () => {
     const allFonts = _.values(_.mapValues(themes, 'font'));
     return allFonts;
   }
+
+  useEffect(() => {
+    if (!user) return;
+
+    getFirebaseUserInfo(user.uid).then(res => {
+      setUserInfo(res);
+    })
+  }, [user]);
+
+  // useEffect(() => {
+  //   console.log(user.uid);
+  //   console.log(userInfo);
+  // }, [user])
+
+  useEffect(() => {
+    if (!user || Object.keys(userInfo).length === 0) return;
+
+    console.log(userInfo);
+
+    if (userInfo.role === 'Coach') {
+      postCoachUser(user.uid, userInfo).then(res => {
+        console.log(res);
+      })
+      return;
+    }
+
+    postPlayerUser(user.uid, userInfo).then(res => {
+      console.log(res);
+    })
+
+  }, [user, userInfo])
 
   useEffect(() => {
     setSelectedTheme(theme);

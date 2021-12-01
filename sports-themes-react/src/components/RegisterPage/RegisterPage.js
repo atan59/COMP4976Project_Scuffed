@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { registerWithEmailAndPassword } from '../Firebase/Firebase';
+import { useNavigate } from 'react-router-dom';
+import classes from './RegisterPage.module.css';
 
 const RegisterPage = () => {
     const [form, setForm] = useState({});
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         setForm({
@@ -14,8 +17,7 @@ const RegisterPage = () => {
             'password': '',
             'confirmPassword': '',
             'role': '',
-            'position': '',
-            'teamName': ''
+            'position': ''
         })
     }, [])
 
@@ -38,7 +40,7 @@ const RegisterPage = () => {
         if (!password) newErrors.password = "Your password cannot be blank";
         if (newErrors.password === undefined && password !== confirmPassword) newErrors.confirmPassword = "Passwords do not match";
         if (!role) newErrors.role = "Please choose a role";
-        
+
         if (role === 'Player' && !position) newErrors.position = "Your position cannot be blank";
 
         return newErrors;
@@ -54,104 +56,110 @@ const RegisterPage = () => {
         }
 
         registerWithEmailAndPassword(form.email, form.password, form).then(() => {
-            alert('You successfully registered');
+            navigate("/home")
         }).catch(err => console.error(err));
     };
 
     return (
         <>
-            <Form onSubmit={handleRegister}>
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.email}
-                        type="text"
-                        value={form.email}
-                        onChange={e => setField('email', e.target.value)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.email}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.firstName}
-                        type="text"
-                        value={form.firstName}
-                        onChange={e => setField('firstName', e.target.value)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.firstName}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.lastName}
-                        type="text"
-                        value={form.lastName}
-                        onChange={e => setField('lastName', e.target.value)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.lastName}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.password}
-                        type="text"
-                        value={form.password}
-                        onChange={e => setField('password', e.target.value)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.confirmPassword}
-                        type="text"
-                        value={form.confirmPassword}
-                        onChange={e => setField('confirmPassword', e.target.value)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.confirmPassword}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Role</Form.Label>
-                    <Form.Control
-                        isInvalid={errors.role}
-                        as="select"
-                        value={form.role}
-                        onChange={e => setField('role', e.target.value)}>
-                        <option value="">Select one</option>
-                        <option value="Coach">Coach</option>
-                        <option value="Player">Player</option>
-                    </Form.Control>
-                    <Form.Control.Feedback type="invalid">
-                        {errors.role}
-                    </Form.Control.Feedback>
-                </Form.Group>
-                {form.role === 'Player' ? (
-                    <Form.Group>
-                        <Form.Label>Position</Form.Label>
-                        <Form.Control
-                            isInvalid={errors.position}
-                            type="text"
-                            value={form.position}
-                            onChange={e => setField('position', e.target.value)}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.position}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                ) : <></>}
-                <Button type="submit">Register</Button>
-            </Form>
+            <div className={classes.registerContainer}>
+                <div className={classes.logoContainer}>
+                </div>
+                <div className={classes.formContainer}>
+                    <Form onSubmit={handleRegister}>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.email}
+                                type="text"
+                                value={form.email}
+                                onChange={e => setField('email', e.target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.email}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.firstName}
+                                type="text"
+                                value={form.firstName}
+                                onChange={e => setField('firstName', e.target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.firstName}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.lastName}
+                                type="text"
+                                value={form.lastName}
+                                onChange={e => setField('lastName', e.target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.lastName}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.password}
+                                type="text"
+                                value={form.password}
+                                onChange={e => setField('password', e.target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.confirmPassword}
+                                type="text"
+                                value={form.confirmPassword}
+                                onChange={e => setField('confirmPassword', e.target.value)}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.confirmPassword}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Role</Form.Label>
+                            <Form.Control
+                                isInvalid={errors.role}
+                                as="select"
+                                value={form.role}
+                                onChange={e => setField('role', e.target.value)}>
+                                <option value="">Select one</option>
+                                <option value="Coach">Coach</option>
+                                <option value="Player">Player</option>
+                            </Form.Control>
+                            <Form.Control.Feedback type="invalid">
+                                {errors.role}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        {form.role === 'Player' ? (
+                            <Form.Group>
+                                <Form.Label>Position</Form.Label>
+                                <Form.Control
+                                    isInvalid={errors.position}
+                                    type="text"
+                                    value={form.position}
+                                    onChange={e => setField('position', e.target.value)}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.position}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        ) : <></>}
+                        <Button type="submit">Register</Button>
+                    </Form>
+                </div>
+            </div>
         </>
     )
 }

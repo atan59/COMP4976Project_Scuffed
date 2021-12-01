@@ -33,6 +33,7 @@ const registerWithEmailAndPassword = async (email, password, form) => {
             firstName: form.firstName,
             lastName: form.lastName,
             role: form.role,
+            position: form.position,
             authProvider: "local",
             email
         });
