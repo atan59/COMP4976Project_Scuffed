@@ -116,7 +116,11 @@ namespace SportsThemesBackend.Controllers
             {
                 try
                 {
-                    if (id != team.CoachId)
+                    var currentTeam = await _context.Teams
+                        .Where(t => t.TeamName == id)
+                        .FirstOrDefaultAsync();
+
+                    if (currentTeam.CoachId != team.CoachId)
                     {
                         var oldCoach = await _context.Coaches
                         .Where(c => c.TeamName == id)
