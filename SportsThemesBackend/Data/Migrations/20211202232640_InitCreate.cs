@@ -245,7 +245,12 @@ namespace SportsThemesBackend.Data.Migrations
                 values: new object[,]
                 {
                     { "a29e2769-5e6b-4312-bda3-7f861490a85c", "Bambam Rubble", "Test Position 1", "Test Team 1" },
-                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" }
+                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" },
+                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953f", "John Smith", "Small Forward", null },
+                    { "e53b645b-6c9f-414f-9c37-b8f33a0e953r", "Mary Johnson", "Center", null },
+                    { "e53b635b-6c9f-414f-9c37-b8f33f0e953r", "Bob Ross", "Point Guard", null },
+                    { "e53b635b-6c9f-4g4f-9c37-b8g33f0e953r", "Garmin Altec", "Power Forward", null },
+                    { "e53b435b-6c9f-4j4f-9c37-b8g33f0e953r", "Jake Tim", "Shooting Guard", null }
                 });
 
             migrationBuilder.InsertData(
