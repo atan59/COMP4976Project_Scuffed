@@ -65,7 +65,7 @@ namespace SportsThemesBackend.Models
 
         [Required]
         [DefaultValue(FontSize.Medium)]
-        [Display(Name = "Header Font Size")]
+        [Display(Name = "Text Font Size")]
         public FontSize TextFontSize { get; set; }
 
         [Required]
