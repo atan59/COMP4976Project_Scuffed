@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SportsThemesBackend.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -112,6 +112,7 @@ namespace SportsThemesBackend.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     BodyColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ListBackgroundColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TextColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ButtonTextColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ButtonBackgroundColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -265,11 +266,11 @@ namespace SportsThemesBackend.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Themes",
-                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "HeaderFontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour", "TextFontSize" },
+                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "HeaderFontSize", "LinkOpacity", "LinkTextColour", "ListBackgroundColour", "Logo", "Name", "TextColour", "TextFontSize" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000", 2 },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000", 2 }
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000", 2 },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000", 2 }
                 });
 
             migrationBuilder.CreateIndex(
