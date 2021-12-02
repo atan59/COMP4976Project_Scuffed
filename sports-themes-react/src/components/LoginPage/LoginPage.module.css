@@ -1,0 +1,49 @@
+* {
+    font-family: 'Nova Square', cursive;
+}
+
+.loginContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.logoContainer {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    background: black;
+}
+
+.logoContainer img {
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+}
+
+.formContainer {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+}
+
+.formContainer h1 {
+    margin-bottom: 3rem;
+}
+
+.inputElements input,
+.inputElements select {
+    margin-bottom: 1rem;
+}
+
+.inputElements div div {
+    margin-bottom: 1rem;
+}
+
+button {
+    margin-top: 2rem;
+}
