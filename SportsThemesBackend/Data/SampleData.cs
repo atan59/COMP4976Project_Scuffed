@@ -88,6 +88,31 @@ namespace SportsThemesBackend.Data
                     Position = "Test Position 2",
                     TeamName = "Test Team 1",
                 },
+                new Player() {
+                    PlayerId = "e53b635b-6c9f-414f-9c37-b8f33a0e953f",
+                    PlayerName = "John Smith",
+                    Position = "Small Forward",
+                },
+                new Player() {
+                    PlayerId = "e53b645b-6c9f-414f-9c37-b8f33a0e953r",
+                    PlayerName = "Mary Johnson",
+                    Position = "Center"
+                },
+                new Player() {
+                    PlayerId = "e53b635b-6c9f-414f-9c37-b8f33f0e953r",
+                    PlayerName = "Bob Ross",
+                    Position = "Point Guard"
+                },
+                new Player() {
+                    PlayerId = "e53b635b-6c9f-4g4f-9c37-b8g33f0e953r",
+                    PlayerName = "Garmin Altec",
+                    Position = "Power Forward"
+                },
+                new Player() {
+                    PlayerId = "e53b435b-6c9f-4j4f-9c37-b8g33f0e953r",
+                    PlayerName = "Jake Tim",
+                    Position = "Shooting Guard"
+                },
             };
 
             return players;
