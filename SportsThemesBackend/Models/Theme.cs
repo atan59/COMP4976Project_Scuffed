@@ -29,6 +29,11 @@ namespace SportsThemesBackend.Models
         public string BodyColour { get; set; }
 
         [Required]
+        [DefaultValue("#ffffff")]
+        [Display(Name = "List Background Colour")]
+        public string ListBackgroundColour { get; set; }
+
+        [Required]
         [DefaultValue("#000000")]
         [Display(Name = "Text Colour")]
         public string TextColour { get; set; }

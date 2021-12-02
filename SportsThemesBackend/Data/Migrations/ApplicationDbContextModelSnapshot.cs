@@ -413,6 +413,10 @@ namespace SportsThemesBackend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ListBackgroundColour")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Logo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -444,6 +448,7 @@ namespace SportsThemesBackend.Data.Migrations
                             HeaderFontSize = 2,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
+                            ListBackgroundColour = "#ffffff",
                             Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                             Name = "Test Theme 1",
                             TextColour = "#000000",
@@ -459,6 +464,7 @@ namespace SportsThemesBackend.Data.Migrations
                             HeaderFontSize = 2,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
+                            ListBackgroundColour = "#ffffff",
                             Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                             Name = "Test Theme 2",
                             TextColour = "#000000",
