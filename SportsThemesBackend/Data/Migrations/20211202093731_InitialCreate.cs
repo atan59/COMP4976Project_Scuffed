@@ -55,7 +55,8 @@ namespace SportsThemesBackend.Data.Migrations
                 columns: table => new
                 {
                     CoachId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CoachName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    CoachName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TeamName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,7 +118,8 @@ namespace SportsThemesBackend.Data.Migrations
                     LinkTextColour = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LinkOpacity = table.Column<int>(type: "int", nullable: false),
                     Font = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FontSize = table.Column<int>(type: "int", nullable: false),
+                    HeaderFontSize = table.Column<int>(type: "int", nullable: false),
+                    TextFontSize = table.Column<int>(type: "int", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -233,8 +235,8 @@ namespace SportsThemesBackend.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Coaches",
-                columns: new[] { "CoachId", "CoachName" },
-                values: new object[] { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble" });
+                columns: new[] { "CoachId", "CoachName", "TeamName" },
+                values: new object[] { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble", null });
 
             migrationBuilder.InsertData(
                 table: "Players",
@@ -263,11 +265,11 @@ namespace SportsThemesBackend.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Themes",
-                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "FontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour" },
+                columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "HeaderFontSize", "LinkOpacity", "LinkTextColour", "Logo", "Name", "TextColour", "TextFontSize" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000" }
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000", 2 },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000", 2 }
                 });
 
             migrationBuilder.CreateIndex(

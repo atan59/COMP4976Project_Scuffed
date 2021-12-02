@@ -60,8 +60,13 @@ namespace SportsThemesBackend.Models
 
         [Required]
         [DefaultValue(FontSize.Medium)]
-        [Display(Name = "Font Size")]
-        public FontSize FontSize { get; set; }
+        [Display(Name = "Header Font Size")]
+        public FontSize HeaderFontSize { get; set; }
+
+        [Required]
+        [DefaultValue(FontSize.Medium)]
+        [Display(Name = "Header Font Size")]
+        public FontSize TextFontSize { get; set; }
 
         [Required]
         [DefaultValue("https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930")]

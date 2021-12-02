@@ -20,7 +20,8 @@ namespace SportsThemesBackend.Data
                     LinkTextColour = "#DC143C",
                     LinkOpacity = 50,
                     Font = "Helvetica",
-                    FontSize = FontSize.Medium,
+                    HeaderFontSize = FontSize.Medium,
+                    TextFontSize = FontSize.Medium,
                     Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                 },
                 new Theme() {
@@ -33,7 +34,8 @@ namespace SportsThemesBackend.Data
                     LinkTextColour = "#DC143C",
                     LinkOpacity = 50,
                     Font = "Helvetica",
-                    FontSize = FontSize.Medium,
+                    HeaderFontSize = FontSize.Medium,
+                    TextFontSize = FontSize.Medium,
                     Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                 },
             };
