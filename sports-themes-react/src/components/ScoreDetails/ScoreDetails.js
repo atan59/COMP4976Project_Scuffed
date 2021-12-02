@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import { getPlayerScoresByID, postPlayerScore } from '../ApiActions/ApiActions';
 import ScoreCard from '../ScoreCard/ScoreCard';
 import classes from './ScoreDetails.module.css'
@@ -7,77 +7,136 @@ import classes from './ScoreDetails.module.css'
 const ScoreDetails = (props) => {
     const [playerScores, setPlayerScores] = useState([]);
     const [form, setForm] = useState({});
-    const [addScoreFormLoaded, setAddScoreFormLoaded] = useState(false);
-    
+    const [errors, setErrors] = useState({});
+    const [headerFontSize, setHeaderFontSize] = useState('');
+    const [textFontSize, setTextFontSize] = useState('');
+    const [addState, setAddState] = useState(false);
+
+    useEffect(() => {
+        setForm({
+            'gameName': '',
+            'playerScore': ''
+        })
+    }, [])
+
     useEffect(() => {
         if (!props.player.playerId) return
         getPlayerScoresByID(props.player.playerId, setPlayerScores)
     }, [props])
 
-    const showAddPlayScoreForm = () => {
-        setAddScoreFormLoaded(true)
-    }
+    useEffect(() => {
+        const headerFontArr = { 0: 'xxx-large', 1: 'xx-large', 2: 'x-large', 3: 'large', 4: 'medium' };
+        const textFontArr = { 0: 'x-large', 1: 'large', 2: 'medium', 3: 'small', 4: 'x-small' };
+        setHeaderFontSize(headerFontArr[props.theme.headerFontSize])
+        setTextFontSize(textFontArr[props.theme.textFontSize])
+    }, [props])
 
     const addPlayerScore = async (e, player, form) => {
         e.preventDefault();
-        await postPlayerScore(player.playerId, form, setAddScoreFormLoaded)
+        await postPlayerScore(player.playerId, form)
         await getPlayerScoresByID(player.playerId, setPlayerScores)
     }
 
     const setField = (name, value) => {
         setForm({ ...form, [name]: value })
+
+        if (errors[name]) setErrors({ ...errors, [name]: null })
     }
 
+    const findFormErrors = () => {
+        const { gameName, playerScore } = form;
+        const newErrors = {};
+
+        if (!gameName) newErrors.gameName = "You must enter a game name";
+        if (playerScore && !/^[0-9]*$/.test(playerScore)) newErrors.playerScore = "A player's score must be an integer";
+        if (!playerScore) newErrors.playerScore = "A player's score cannot be blank";
+
+        return newErrors;
+    }
+
+    const handleAdd = async (e) => {
+        e.preventDefault();
+
+        const newErrors = findFormErrors();
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        postPlayerScore(props.player.playerId, form, setAddState)
+    };
+
+    const handleClose = () => setAddState(false)
+
     return (
-        <div className={classes.scoreContainer}>
-            <div className={classes.scoreHeader}>
-                <p>{props.player.playerName}'s Scores</p>
-                <Button
-                    style={{
-                        backgroundColor: props.theme.buttonBackgroundColour,
-                        color: props.theme.buttonTextColour
-                    }} onClick={()=>showAddPlayScoreForm()}>
-                    Add Score
-                </Button>
-            </div>
-            <div className={classes.scoreListContainer}>
+        <>
+            <div className={classes.scoreContainer}>
+                <div className={classes.scoreHeader}
+                    style={{ fontSize: headerFontSize }}>
+                    <p>{props.player.playerName}'s Scores</p>
+                    <Button
+                        onClick={() => setAddState(true)}
+                        style={{
+                            backgroundColor: props.theme.buttonBackgroundColour,
+                            color: props.theme.buttonTextColour,
+                            fontSize: textFontSize
+                        }}>
+                        Add Score
+                    </Button>
+                </div>
+                <div className={classes.scoreListContainer}>
                     {playerScores.map(score => {
-                        return <ScoreCard key={score.scoreId} theme={props.theme} score={score} />
+                        return <ScoreCard key={score.scoreId} theme={props.theme} score={score} playerID={props.player.playerId} />
                     })}
+                </div>
             </div>
-            <div className={classes.addScoreFormContainer}>
-                <Form onSubmit={(e)=> addPlayerScore(e, props.player, form)} style={{ visibility: addScoreFormLoaded ? 'visible': 'hidden'}}>
-                    <h1>Team Scuffed</h1>
-                    <div className={classes.inputElements}>
-                        <Form.Group>
-                            <Form.Label>Game Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={form.gameName}
-                                onChange={e => setField('gameName', e.target.value)}
-                            />
-                        </Form.Group>
-                    </div>
-                    <div className={classes.inputElements}>
-                        <Form.Group>
-                            <Form.Label>Score</Form.Label>
-                            <Form.Control
-                                type="int"
-                                value={form.score}
-                                onChange={e => setField('score', e.target.value)}
-                            />
-                        </Form.Group>
-                    </div>
-                    <Button style={{
-                        backgroundColor: props.theme.buttonBackgroundColour,
-                        color: props.theme.buttonTextColour
-                        }} 
-                        type="submit">
+            <Modal show={addState} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form className={classes.addForm} onSubmit={handleAdd}>
+                        <div className={classes.inputElements}>
+                            <Form.Group>
+                                <Form.Label><i class="fas fa-envelope"></i> Game Name</Form.Label>
+                                <Form.Control
+                                    isInvalid={errors.gameName}
+                                    type="text"
+                                    value={form.gameName}
+                                    onChange={e => setField('gameName', e.target.value)}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.gameName}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className={classes.inputElements}>
+                            <Form.Group>
+                                <Form.Label><i class="fas fa-lock"></i> Player Score</Form.Label>
+                                <Form.Control
+                                    isInvalid={errors.playerScore}
+                                    type="text"
+                                    value={form.playerScore}
+                                    onChange={e => setField('playerScore', e.target.value)}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.playerScore}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <Button variant='dark' type="submit">Save Score</Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
                         Save Score
                     </Button>
-                </Form>
-            </div>
-        </div>
+                </Modal.Footer>
+            </Modal>
+        </>
     )
 }
 

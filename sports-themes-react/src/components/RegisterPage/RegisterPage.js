@@ -66,7 +66,7 @@ const RegisterPage = () => {
                     <img src={TeamLogo} alt="Logo" />
                 </div>
                 <div className={classes.formContainer}>
-                    <Form onSubmit={handleRegister}>
+                    <Form className={classes.registerForm} onSubmit={handleRegister}>
                         <h1>Team Scuffed</h1>
                         <div className={classes.inputElements}>
                             <Form.Group>

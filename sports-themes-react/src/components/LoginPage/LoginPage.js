@@ -69,7 +69,7 @@ const LoginPage = () => {
                     <img src={TeamLogo} alt="Logo" />
                 </div>
                 <div className={classes.formContainer}>
-                    <Form onSubmit={handleLogin}>
+                    <Form className={classes.loginForm} onSubmit={handleLogin}>
                         <h1>Team Scuffed</h1>
                         <div className={classes.inputElements}>
                             <Form.Group>

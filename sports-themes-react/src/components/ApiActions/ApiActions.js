@@ -76,12 +76,23 @@ export const getPlayerScoresByID = (playerID, setPlayerScores) => {
     }).catch(err => console.log(err))
 }
 
-export const postPlayerScore = (playerID, form, setAddScoreFormLoaded) => {
+export const postPlayerScore = (playerID, form, setAddState) => {
     return axios.post('https://localhost:5001/api/scores', {
         "gameName": form.gameName,
-        "playerScore": form.score,
+        "playerScore": form.playerScore,
         "playerId": playerID
-    }).then(res => {
-        setAddScoreFormLoaded(false)
+    }).then(() => {
+        setAddState(false)
+    }).catch(err => console.log(err))
+}
+
+export const updatePlayerScore = (scoreID, gameName, playerScore, playerID, setEditState) => {
+    return axios.put(`https://localhost:5001/api/scores/${scoreID}`, {
+        "scoreId": scoreID,
+        "gameName": gameName,
+        "playerScore": playerScore,
+        "playerId": playerID
+    }).then(() => {
+        setEditState(false);
     }).catch(err => console.log(err))
 }

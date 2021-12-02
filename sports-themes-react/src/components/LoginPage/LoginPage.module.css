@@ -46,6 +46,6 @@
     margin-bottom: 1rem;
 }
 
-form > :last-child {
+.loginForm > :last-child {
     margin-top: 2rem;
 }

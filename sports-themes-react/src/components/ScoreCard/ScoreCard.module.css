@@ -20,6 +20,15 @@
     margin: 0;
 }
 
+.scoreInfo > input {
+    width: 15rem;
+    padding: 0.5rem;
+}
+
+.scoreInfo > input:first-child {
+    margin-right: 4rem;
+}
+
 .flexEnd {
     width: 50%;
     display: flex;
