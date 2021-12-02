@@ -2,7 +2,7 @@
     font-family: 'Nova Square', cursive;
 }
 
-.registerContainer {
+.loginContainer {
     width: 100vw;
     height: 100vh;
     display: flex;

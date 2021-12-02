@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import instance from '../../Assests/Axios/AxiosInstance';
+import instance from '../../Assets/Axios/AxiosInstance';
 import classes from './HomePage.module.css';
 import WebFont from 'webfontloader';
 import TeamContainer from '../TeamContainer/TeamContainer';

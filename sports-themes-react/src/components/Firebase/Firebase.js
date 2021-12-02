@@ -30,8 +30,7 @@ const registerWithEmailAndPassword = async (email, password, form) => {
 
         await db.collection("users").add({
             uid: user.uid,
-            firstName: form.firstName,
-            lastName: form.lastName,
+            name: form.name,
             role: form.role,
             position: form.position,
             authProvider: "local",

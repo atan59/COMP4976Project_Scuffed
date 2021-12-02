@@ -5,14 +5,14 @@ import { v4 } from 'uuid';
 export const postCoachUser = (uid, userInfo) => {
     return axios.post('https://localhost:5001/api/coaches/', {
         "coachID": uid,
-        "coachName": `${userInfo.firstName} ${userInfo.lastName}`
+        "coachName": userInfo.name
     }).catch(err => console.log(err));
 }
 
 export const postPlayerUser = (uid, userInfo) => {
     return axios.post('https://localhost:5001/api/players/', {
         "playerID": uid,
-        "playerName": `${userInfo.firstName} ${userInfo.lastName}`,
+        "playerName": userInfo.name,
         "position": userInfo.position
     }).catch(err => console.log(err));
 }
