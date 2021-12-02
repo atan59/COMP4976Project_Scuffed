@@ -57,7 +57,7 @@ namespace SportsThemesBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id, Name, BodyColour, TextColour, ButtonTextColour, ButtonBackgroundColour, LinkTextColour, LinkOpacity, Font, HeaderFontSize, Logo, TextFontSize")] Theme theme)
+        public async Task<IActionResult> Create([Bind("Id, Name, BodyColour, ListBackgroundColour, TextColour, ButtonTextColour, ButtonBackgroundColour, LinkTextColour, LinkOpacity, Font, HeaderFontSize, Logo, TextFontSize")] Theme theme)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SportsThemesBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id, Name, BodyColour, TextColour, ButtonTextColour, ButtonBackgroundColour, LinkTextColour, LinkOpacity, Font, HeaderFontSize, Logo, TextFontSize")] Theme theme)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id, Name, BodyColour, ListBackgroundColour, TextColour, ButtonTextColour, ButtonBackgroundColour, LinkTextColour, LinkOpacity, Font, HeaderFontSize, Logo, TextFontSize")] Theme theme)
         {
             if (id != theme.Id)
             {
