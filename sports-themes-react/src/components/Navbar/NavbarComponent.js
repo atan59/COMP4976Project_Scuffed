@@ -15,7 +15,7 @@ const NavbarComponent = (props) => {
                 </Container>
                 <div className={classes.flexEnd}>
                     <Nav.Link className={classes.welcomeUser}>Welcome, {props.name}</Nav.Link>
-                    <Nav.Link className={classes.logoutButton} href="/" onClick={props.logout()}>Logout</Nav.Link>
+                    <Nav.Link className={classes.logoutButton} href="/" onClick={() => props.logout()}>Logout</Nav.Link>
                 </div>
             </Navbar>
         </>

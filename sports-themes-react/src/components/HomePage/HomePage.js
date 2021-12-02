@@ -6,7 +6,7 @@ import TeamContainer from '../TeamContainer/TeamContainer';
 import { auth, logout } from '../Firebase/Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import _ from 'lodash';
-import { getFirebaseUserInfo, postCoachUser, postPlayerUser } from '../ApiActions/ApiActions';
+import { getFirebaseUserInfo, getTeamByCoach, getTeamNameByPlayer, getThemeByID, getThemeIDByTeamName, postCoachUser, postPlayerUser } from '../ApiActions/ApiActions';
 import NavbarComponent from '../Navbar/NavbarComponent';
 
 
@@ -64,16 +64,13 @@ const HomePage = () => {
   // const {theme, themeLoaded, getFonts} = useTheme();
   const [theme, setTheme] = useState(themes.seaWave)
   const [themeLoaded, setThemeLoaded] = useState(false);
-  const [selectedTheme, setSelectedTheme] = useState(theme);
-  const [user] = useAuthState(auth);
+  const [selectedTheme, setSelectedTheme] = useState({});
+  const [user, loading] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState({});
-  // const Container = styled.div`margin: 5px auto 5px auto;`;
-  const coachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a"; // HARDCODED THIS FOR NOW...
+  const [teamName, setTeamName] = useState('');
+  const [themeID, setThemeID] = useState('');
 
-  const getFonts = () => {
-    const allFonts = _.values(_.mapValues(themes, 'font'));
-    return allFonts;
-  }
+  console.log(selectedTheme);
 
   useEffect(() => {
     if (!user) return;
@@ -83,81 +80,63 @@ const HomePage = () => {
     })
   }, [user]);
 
-  // useEffect(() => {
-  //   console.log(user.uid);
-  //   console.log(userInfo);
-  // }, [user])
+  useEffect(() => {
+    if (Object.keys(userInfo).length === 0) return;
+
+    checkNewUser();
+  }, [userInfo])
 
   useEffect(() => {
-    if (!user || Object.keys(userInfo).length === 0) return;
-
-    console.log(userInfo);
+    if (Object.keys(userInfo).length === 0) return;
 
     if (userInfo.role === 'Coach') {
-      postCoachUser(user.uid, userInfo).then(res => {
-        console.log(res);
+      getTeamByCoach(user.uid).then(res => {
+        setTeamName(res.teamName);
+        setThemeID(res.themeId);
       })
       return;
     }
 
-    postPlayerUser(user.uid, userInfo).then(res => {
-      console.log(res);
+    getTeamNameByPlayer(user.uid).then(res => {
+      setTeamName(res)
+      getThemeIDByTeamName(res, setThemeID)
     })
-
-  }, [user, userInfo])
-
-  useEffect(() => {
-    setSelectedTheme(theme);
-  }, [theme]);
+  }, [userInfo])
 
   useEffect(() => {
-    setThemeLoaded(true);
-  }, [selectedTheme])
+    if (!themeID) return
 
-  // get coach OR player
-  useEffect(() => {
-    // TODO: add an if else statement, which user type is logged in, get coach or player depending on that (for now we'll do coach only)
-    instance.get(`https://localhost:5001/api/coaches/${coachId}`).then(res => { // TODO: make the coach id DYNAMIC on the one logged in
-      let response = res;
-      console.log(response, "<== response");
-    }).catch(err => {
-      console.log(err)
-    })
-  }, [])
-
-  // get team
-  useEffect(() => {
-    instance.get(`https://localhost:5001/api/teams`).then(res => {
-      let response = res;
-      console.log(response, "<== response");
-    }).catch(err => {
-      console.log(err)
-    })
-  }, [])
-
-  // get theme
-
-  // 4: Load all the fonts
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: getFonts()
-      }
-    });
-  });
-
-  console.log(themeLoaded, "<== themeLoaded");
-  console.log(selectedTheme, "<== selectedTheme");
+    getThemeByID(themeID, setSelectedTheme, setThemeLoaded)
+  }, [themeID]);
 
   // 5: Render if the theme is loaded.
+  const checkNewUser = async () => {
+    const creationTime = new Date(auth.currentUser.metadata.creationTime).getTime() / 1000;
+    const loginTime = Math.round(new Date().getTime() / 1000);
+
+    // Checks if user is a new user (2 second range)
+    if (loginTime + 2 >= creationTime && loginTime - 2 <= creationTime) {
+      if (userInfo.role === 'Coach') {
+        await postCoachUser(user?.uid, userInfo);
+        return;
+      }
+      await postPlayerUser(user?.uid, userInfo);
+    }
+  }
+
+  const getFonts = () => {
+    const allFonts = _.values(_.mapValues(themes, 'font'));
+    return allFonts;
+  }
+
   return (
     <>
-      <NavbarComponent logout={logout}/>
-      <div style={{ backgroundColor: realTheme.bodyColour }}>
+      <NavbarComponent name={userInfo.name} logout={logout} />
+      <div style={{ backgroundColor: selectedTheme.bodyColour }}>
         {
           themeLoaded && <TeamContainer
-            selectedTheme={realTheme}
-            teamName="Team Pepe"
+            theme={selectedTheme}
+            teamName={teamName}
           />
         }
       </div>
