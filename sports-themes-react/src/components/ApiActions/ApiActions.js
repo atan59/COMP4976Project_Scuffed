@@ -22,3 +22,50 @@ export const getFirebaseUserInfo = (uid) => {
         return res.docs[0].data();
     }).catch(err => console.log(err));
 }
+
+export const getTeamByCoach = (uid) => {
+    return axios.get(`https://localhost:5001/api/teams/coach/${uid}`).then(res => {
+        return res.data
+    }).catch(err => console.log(err))
+}
+
+export const getTeamNameByPlayer = (uid) => {
+    return axios.get(`https://localhost:5001/api/players/${uid}`).then(res => {
+        return res.teamName
+    }).catch(err => console.log(err))
+}
+
+export const getPlayerRoster = (teamName, setPlayerRoster) => {
+    return axios.get('https://localhost:5001/api/players').then(res => {
+        console.log(res.data);
+        setPlayerRoster(res.data.filter(player => player.teamName === teamName))
+    }).catch(err => console.log(err))
+}
+
+export const getThemeIDByTeamName = (teamName, setThemeID) => {
+    return axios.get(`https://localhost:5001/api/teams/${teamName}`).then(res => {
+        setThemeID(res.themeId)
+    }).catch(err => console.log(err))
+}
+
+export const getNoTeamRoster = (setRoster) => {
+    return axios.get('https://localhost:5001/api/players/noTeam').then(res => {
+        setRoster(res.data)
+    }).catch(err => console.log(err))
+}
+
+export const postPlayerToTeam = (player, teamName) => {
+    return axios.put(`https://localhost:5001/api/players/${player.playerId}`, {
+        "playerId": player.playerId,
+        "playerName": player.playerName,
+        "position": player.position,
+        "teamName": teamName
+    }).then(res => console.log(res)).catch(err => console.log(err))
+}
+
+export const getThemeByID = (themeID, setTheme, setThemeLoaded) => {
+    return axios.get(`https://localhost:5001/api/themes/${themeID}`).then(res => {
+        setTheme(res.data)
+        setThemeLoaded(true)
+    }).catch(err => console.log(err))
+}
