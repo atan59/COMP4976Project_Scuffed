@@ -116,29 +116,14 @@ namespace SportsThemesBackend.Controllers
             {
                 try
                 {
-                    var currentTeam = await _context.Teams
-                        .Where(t => t.TeamName == id)
-                        .FirstOrDefaultAsync();
-
-                    if (currentTeam.CoachId != team.CoachId)
-                    {
-                        var oldCoach = await _context.Coaches
-                        .Where(c => c.TeamName == id)
-                        .FirstOrDefaultAsync();
-
-                        oldCoach.TeamName = null;
-
-                        _context.Update(oldCoach);
-                    }
-
-                    var newCoach = await _context.Coaches
+                    var coach = await _context.Coaches
                     .Where(c => c.CoachId == team.CoachId)
                     .FirstOrDefaultAsync();
 
-                    newCoach.TeamName = team.TeamName;
+                    coach.TeamName = team.TeamName;
 
                     _context.Update(team);
-                    _context.Update(newCoach);
+                    _context.Update(coach);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
