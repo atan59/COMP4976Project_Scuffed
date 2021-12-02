@@ -11,6 +11,7 @@ const PlayerCard = (props) => {
             </div>
             <div className={classes.flexEnd}>
                 <Button
+                    onClick={() => props.handleClick(props.player)}
                     style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}>
                     View Scores
                 </Button>

@@ -5,6 +5,7 @@ import classes from '../TeamContainer/TeamContainer.module.css';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import PlayerCard from '../PlayerCard/PlayerCard';
+import ScoreDetails from '../ScoreDetails/ScoreDetails';
 
 const TeamContainer = (props) => {
     const [noTeamRoster, setNoTeamRoster] = useState([]);
@@ -12,6 +13,7 @@ const TeamContainer = (props) => {
     const [playerRoster, setPlayerRoster] = useState([]);
     const [headerFontSize, setHeaderFontSize] = useState('');
     const [textFontSize, setTextFontSize] = useState('');
+    const [playerDetails, setPlayerDetails] = useState(null);
     const dropdownRef = useRef(null);
     const confirmRef = useRef(null);
     const notyf = new Notyf({
@@ -79,15 +81,16 @@ const TeamContainer = (props) => {
             <div className={classes.homeContainer}>
                 <div className={classes.playerListContainer}>
                     {playerRoster.map(player => {
-                        return <PlayerCard theme={props.theme} player={player} />
+                        return <PlayerCard theme={props.theme} player={player} handleClick={setPlayerDetails} />
                     })}
                 </div>
-                <div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
-                </div>
+                {<div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
+                    {playerDetails !== null && <ScoreDetails player={playerDetails} theme={props.theme} />}
+                </div>}
             </div>
             <div className={classes.addPlayerContainer} style={{ color: props.theme.textColour }}>
                 <Button
-                    style={{ backgroundColor: props.theme.buttonBackgroundColour }}
+                    style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}
                     onClick={() => showDropdown()}>
                     Add Player
                 </Button>
@@ -105,7 +108,7 @@ const TeamContainer = (props) => {
                 <Button
                     ref={confirmRef}
                     onClick={() => addPlayerToTeam(selectedPlayer)}
-                    style={{ backgroundColor: props.theme.buttonBackgroundColour }}>
+                    style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}>
                     Confirm
                 </Button>
             </div>

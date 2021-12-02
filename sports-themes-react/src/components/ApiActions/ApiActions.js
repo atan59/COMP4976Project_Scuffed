@@ -69,3 +69,9 @@ export const getThemeByID = (themeID, setTheme, setThemeLoaded) => {
         setThemeLoaded(true)
     }).catch(err => console.log(err))
 }
+
+export const getPlayerScoresByID = (playerID, setPlayerScores) => {
+    return axios.get('https://localhost:5001/api/scores').then(res => {
+        setPlayerScores(res.data.filter(score => score.playerId === playerID))
+    }).catch(err => console.log(err))
+}
