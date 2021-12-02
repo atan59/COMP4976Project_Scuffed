@@ -15,5 +15,10 @@ namespace SportsThemesBackend.Models
         [Display(Name = "Coach Name")]
         [MaxLength(100)]
         public string CoachName { get; set;}
+
+        [DefaultValue("My Team")]
+        [Display(Name = "Team Name")]
+        [MaxLength(100)]
+        public string TeamName { get; set; }
     }
 }

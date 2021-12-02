@@ -31,6 +31,15 @@ namespace SportsThemesBackend.Controllers.api
                 .ToListAsync();
         }
 
+        // GET: api/Players/NoTeam
+        [HttpGet("NoTeam")]
+        public async Task<ActionResult<IEnumerable<Player>>> GetPlayersWithNoTeam()
+        {
+            return await _context.Players
+                .Where(p => p.TeamName == null)
+                .ToListAsync();
+        }
+
         // GET: api/Players/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Player>> GetPlayer(string id)

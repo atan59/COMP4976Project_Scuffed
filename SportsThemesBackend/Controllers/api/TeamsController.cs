@@ -46,6 +46,21 @@ namespace SportsThemesBackend.Controllers.api
             return team;
         }
 
+        // GET: api/Teams/Coach/00000000-0000-0000-0000-000000000001
+        [HttpGet("Coach/{coachId}")]
+        public async Task<ActionResult<Team>> GetTeamByCoach(string coachId)
+        {
+            var team = await _context.Teams
+                .FirstOrDefaultAsync(t => t.CoachId == coachId);
+
+            if (team == null)
+            {
+                return NotFound();
+            }
+
+            return team;
+        }
+
         // PUT: api/Teams/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
