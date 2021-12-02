@@ -75,3 +75,13 @@ export const getPlayerScoresByID = (playerID, setPlayerScores) => {
         setPlayerScores(res.data.filter(score => score.playerId === playerID))
     }).catch(err => console.log(err))
 }
+
+export const postPlayerScore = (playerID, form, setAddScoreFormLoaded) => {
+    return axios.post('https://localhost:5001/api/scores', {
+        "gameName": form.gameName,
+        "playerScore": form.score,
+        "playerId": playerID
+    }).then(res => {
+        setAddScoreFormLoaded(false)
+    }).catch(err => console.log(err))
+}

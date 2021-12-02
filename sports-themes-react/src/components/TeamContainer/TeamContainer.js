@@ -81,7 +81,7 @@ const TeamContainer = (props) => {
             <div className={classes.homeContainer}>
                 <div className={classes.playerListContainer}>
                     {playerRoster.map(player => {
-                        return <PlayerCard theme={props.theme} player={player} handleClick={setPlayerDetails} />
+                        return <PlayerCard key={player.playerId} theme={props.theme} player={player} handleClick={setPlayerDetails} />
                     })}
                 </div>
                 {<div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
