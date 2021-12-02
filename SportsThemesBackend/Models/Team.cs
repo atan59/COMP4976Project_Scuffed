@@ -21,10 +21,10 @@ namespace SportsThemesBackend.Models
         public string City { get; set; }
 
         [Required]
-        [Display(Name = "Coach Id")]
+        [Display(Name = "Coach")]
         public string CoachId { get; set; }
 
-        [Display(Name = "Theme Id")]
+        [Display(Name = "Theme")]
         public Guid ThemeId { get; set; }
     }
 }

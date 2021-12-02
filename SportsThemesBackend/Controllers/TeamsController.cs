@@ -50,7 +50,7 @@ namespace SportsThemesBackend.Controllers
         // GET: Teams/Create
         public IActionResult Create()
         {
-            ViewData["Coaches"] = new SelectList(_context.Coaches, "CoachId", "CoachName");
+            ViewData["Coaches"] = new SelectList(_context.Coaches.Where(c => c.TeamName == null), "CoachId", "CoachName");
             ViewData["Themes"] = new SelectList(_context.Themes, "Id", "Name");
             return View();
         }
@@ -64,7 +64,14 @@ namespace SportsThemesBackend.Controllers
         {
             if (ModelState.IsValid)
             {
+                var coach = await _context.Coaches
+                    .Where(c => c.CoachId == team.CoachId)
+                    .FirstOrDefaultAsync();
+
+                coach.TeamName = team.TeamName;
+
                 _context.Add(team);
+                _context.Update(coach);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -87,7 +94,7 @@ namespace SportsThemesBackend.Controllers
                 return NotFound();
             }
 
-            ViewData["Coaches"] = new SelectList(_context.Coaches, "CoachId", "CoachName");
+            ViewData["Coaches"] = new SelectList(_context.Coaches.Where(c => c.TeamName == null || c.CoachId == team.CoachId), "CoachId", "CoachName");
             ViewData["Themes"] = new SelectList(_context.Themes, "Id", "Name");
 
             return View(team);
@@ -109,7 +116,25 @@ namespace SportsThemesBackend.Controllers
             {
                 try
                 {
+                    if (id != team.CoachId)
+                    {
+                        var oldCoach = await _context.Coaches
+                        .Where(c => c.TeamName == id)
+                        .FirstOrDefaultAsync();
+
+                        oldCoach.TeamName = null;
+
+                        _context.Update(oldCoach);
+                    }
+
+                    var newCoach = await _context.Coaches
+                    .Where(c => c.CoachId == team.CoachId)
+                    .FirstOrDefaultAsync();
+
+                    newCoach.TeamName = team.TeamName;
+
                     _context.Update(team);
+                    _context.Update(newCoach);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -153,6 +178,13 @@ namespace SportsThemesBackend.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var team = await _context.Teams.FindAsync(id);
+            var coach = await _context.Coaches
+                    .Where(c => c.TeamName == id)
+                    .FirstOrDefaultAsync();
+
+            coach.TeamName = null;
+
+            _context.Update(coach);
             _context.Teams.Remove(team);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
