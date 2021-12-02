@@ -28,11 +28,16 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     place-items: center;
 }
 
 .formContainer h1 {
     margin-bottom: 3rem;
+}
+
+.formContainer > :last-child {
+    margin-top: 2rem;
 }
 
 .inputElements input,

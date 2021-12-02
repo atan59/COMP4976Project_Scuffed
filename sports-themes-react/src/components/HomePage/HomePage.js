@@ -3,10 +3,11 @@ import instance from '../../Assets/Axios/AxiosInstance';
 import classes from './HomePage.module.css';
 import WebFont from 'webfontloader';
 import TeamContainer from '../TeamContainer/TeamContainer';
-import { auth } from '../Firebase/Firebase';
+import { auth, logout } from '../Firebase/Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import _ from 'lodash';
 import { getFirebaseUserInfo, postCoachUser, postPlayerUser } from '../ApiActions/ApiActions';
+import NavbarComponent from '../Navbar/NavbarComponent';
 
 
 const HomePage = () => {
@@ -150,14 +151,17 @@ const HomePage = () => {
 
   // 5: Render if the theme is loaded.
   return (
-    <div style={{ backgroundColor: realTheme.bodyColour }}>
-      {
-        themeLoaded && <TeamContainer
-          selectedTheme={realTheme}
-          teamName="Team Pepe"
-        />
-      }
-    </div>
+    <>
+      <NavbarComponent logout={logout}/>
+      <div style={{ backgroundColor: realTheme.bodyColour }}>
+        {
+          themeLoaded && <TeamContainer
+            selectedTheme={realTheme}
+            teamName="Team Pepe"
+          />
+        }
+      </div>
+    </>
   );
 }
 

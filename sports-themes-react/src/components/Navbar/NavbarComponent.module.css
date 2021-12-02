@@ -1,0 +1,57 @@
+body {
+    overflow: hidden;
+}
+
+img {
+    width: 100px;
+    height: auto;
+}
+
+.container a {
+    font-size: 2rem;
+}
+
+.flexEnd > * {
+    font-size: 1.5rem;
+}
+
+
+.flexEnd {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container {
+    padding: 0;
+    margin: 0;
+}
+
+.logoutButton {
+    color: rgba(255,255,255,.55);
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    transition: color .15s ease-in-out, 
+        background-color .15s ease-in-out,
+        border-color .15s ease-in-out;
+}
+
+.logoutButton:hover {
+    color: #fff;
+    border-bottom: 3px solid #fff;
+    transform: scale(1.03);
+}
+
+.welcomeUser {
+    color: rgba(255,255,255,.55);
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    cursor: default;
+}
+
+.welcomeUser:hover,
+.welcomeUser:focus {
+    color: rgba(255,255,255,.55);
+}

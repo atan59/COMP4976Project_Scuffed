@@ -101,6 +101,7 @@ const LoginPage = () => {
                         </div>
                         <Button variant='dark' type="submit">Login</Button>
                     </Form>
+                    <p>Need an account? <a href="/register">Sign up now!</a></p>
                 </div>
             </div>
         </>

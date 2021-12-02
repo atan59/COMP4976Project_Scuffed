@@ -159,6 +159,7 @@ const RegisterPage = () => {
                         ) : <></>}
                         <Button variant='dark' type="submit">Register</Button>
                     </Form>
+                    <p>Already have an account? <a href="/">Login now!</a></p>
                 </div>
             </div>
         </>
