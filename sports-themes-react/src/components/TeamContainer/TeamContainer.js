@@ -2,34 +2,58 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { getNoTeamRoster, postPlayerToTeam, getPlayerRoster } from '../ApiActions/ApiActions';
 import classes from '../TeamContainer/TeamContainer.module.css';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+import PlayerCard from '../PlayerCard/PlayerCard';
 
 const TeamContainer = (props) => {
     const [noTeamRoster, setNoTeamRoster] = useState([]);
     const [selectedPlayer, setSelectedPlayer] = useState({});
     const [playerRoster, setPlayerRoster] = useState([]);
-    const [fontSize, setFontSize] = useState('');
+    const [headerFontSize, setHeaderFontSize] = useState('');
+    const [textFontSize, setTextFontSize] = useState('');
     const dropdownRef = useRef(null);
     const confirmRef = useRef(null);
+    const notyf = new Notyf({
+        duration: 4000,
+        position: {
+            x: 'right',
+            y: 'bottom',
+        }
+    });
 
     useEffect(() => {
         getNoTeamRoster(setNoTeamRoster);
 
         if (!props.teamName) return
-
         getPlayerRoster(props.teamName, setPlayerRoster)
     }, [props])
 
     useEffect(() => {
-        const fontArr = { 0: 'xxx-large', 1: 'xx-large', 2: 'x-large', 3: 'large', 4: 'medium' };
-        setFontSize(fontArr[props.theme.fontSize])
+        const headerFontArr = { 0: 'xxx-large', 1: 'xx-large', 2: 'x-large', 3: 'large', 4: 'medium' };
+        const textFontArr = { 0: 'x-large', 1: 'large', 2: 'medium', 3: 'small', 4: 'x-small' };
+        setHeaderFontSize(headerFontArr[props.theme.headerFontSize])
+        setTextFontSize(textFontArr[props.theme.textFontSize])
     }, [props])
 
     const addPlayerToTeam = async (player) => {
+        const confirmButton = confirmRef.current;
+        confirmButton.style.visibility = 'hidden';
+
+        const dropdown = dropdownRef.current;
+        dropdown.style.visibility = 'hidden';
+
         await postPlayerToTeam(JSON.parse(player), props.teamName)
         await getPlayerRoster(props.teamName, setPlayerRoster)
+        await getNoTeamRoster(setNoTeamRoster);
     }
 
     const showDropdown = () => {
+        if (noTeamRoster.length === 0) {
+            notyf.error('All players are currently on a team');
+            return
+        }
+
         const dropdown = dropdownRef.current;
         dropdown.style.visibility = 'visible';
     }
@@ -47,25 +71,18 @@ const TeamContainer = (props) => {
     }
 
     return (
-        <div className={classes.container}>
-            <div className={classes.logoTeamNameContainer} style={{ fontFamily: props.theme.font }}>
+        <div className={classes.container} style={{ fontSize: textFontSize }}>
+            <div className={classes.logoTeamNameContainer}>
                 <img src={props.theme.logo} alt="" className={classes.logo} />
-                <div className={classes.teamName} style={{ fontSize: fontSize, color: props.theme.textColour }}>{props.teamName} Player Statistics</div>
+                <div className={classes.teamName} style={{ fontSize: headerFontSize, color: props.theme.textColour }}>{props.teamName} Player Statistics</div>
             </div>
-            <div className={classes.playerListAndScoreContainer}>
+            <div className={classes.homeContainer}>
                 <div className={classes.playerListContainer}>
                     {playerRoster.map(player => {
-                        return <>
-                            <div className={classes.playerCard} style={{ color: props.theme.textColour }}>
-                                <div className={classes.playerName}>{player.playerName}</div>
-                                <div className={classes.playerPosition}>{player.position}</div>
-                                <button className={classes.viewScoreBtn} style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}>View Scores</button>
-                            </div>
-                        </>
+                        return <PlayerCard theme={props.theme} player={player} />
                     })}
                 </div>
                 <div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
-                    score container view
                 </div>
             </div>
             <div className={classes.addPlayerContainer} style={{ color: props.theme.textColour }}>

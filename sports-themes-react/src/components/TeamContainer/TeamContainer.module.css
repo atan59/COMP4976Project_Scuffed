@@ -1,62 +1,81 @@
-.container{
-    height: 60vh;
+.container {
+    height: 40vh;
     width: 100%;
 }
-.logoTeamNameContainer{
-    display: inline-flex;
-    flex-direction: row;
-    align-content: center;
-    text-align: center;
-    width: 100%;
-    height: 50%;
-    line-height: 200px;
-    padding: 5%;
+
+.logoTeamNameContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 3rem;
+    padding: 4rem;
 }
-.logo{
-    width: 150px;
-    height: 150px;
+
+.logo {
+    width: 9.375rem;
+    height: 9.375rem;
     border-radius: 50%;
+    margin-right: 5rem;
+    box-shadow: 5px 5px 5px #000;
 }
-.teamName{
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    padding: 5%;
+
+.homeContainer {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    width: 90%;
+    height: 100%;
+    border: 3px solid black;
+    margin: 0 auto;
 }
-.playerListAndScoreContainer{
-    display: inline-flex;
-    flex-direction: row;
-    width: 100%;
-    height: 50%;
+
+.homeContainer > :first-child {
+    border-right: 3px solid black;
 }
-.playerListContainer{
+
+.playerListContainer {
     display: flex;
     flex-direction: column;
     width: 50%;
     height: 100%;
     overflow-y: auto;
 }
+
 .playerScoreContainer{
     width: 50%;
     height: 100%;
     text-align: center;
-    border: 1px solid grey;
 }
-.playerCard{
+
+.playerCard {
     width: 100%;
-    display: inline-flex;
-    flex-direction: row;
-    padding: 2%;
-    border: grey 1px solid;
-    height:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 1rem;
+    border-bottom: 3px solid black;
 }
-.playerName{
-    padding: 3%;
+
+.playerInfo {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+    padding: 2rem;
 }
-.playerPosition{
-    padding: 3%;
+
+.playerInfo > p {
+    padding: 0;
+    margin: 0;
 }
-.viewScoreBtn{
+
+.flexEnd {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flexEnd > :first-child {
     margin-top: 1%;
     width: 120px;
     height: 40px;
@@ -94,7 +113,7 @@
     display: flex;
     justify-content: space-between;
     place-items: center;
-    margin: 2rem 3rem; 
+    margin: 2rem 7rem; 
 }
 
 .addPlayerContainer > :first-child {

@@ -1,11 +1,8 @@
-* {
-    font-family: 'Nova Square', cursive;
-}
-
 .registerContainer {
     width: 100vw;
     height: 100vh;
     display: flex;
+    font-family: 'Nova Square', cursive;
 }
 
 .logoContainer {

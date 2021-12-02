@@ -91,8 +91,8 @@ const HomePage = () => {
 
     if (userInfo.role === 'Coach') {
       getTeamByCoach(user.uid).then(res => {
-        setTeamName(res.teamName);
-        setThemeID(res.themeId);
+        setTeamName(res?.teamName);
+        setThemeID(res?.themeId);
       })
       return;
     }
@@ -132,13 +132,10 @@ const HomePage = () => {
   return (
     <>
       <NavbarComponent name={userInfo.name} logout={logout} />
-      <div style={{ backgroundColor: selectedTheme.bodyColour }}>
-        {
-          themeLoaded && <TeamContainer
-            theme={selectedTheme}
-            teamName={teamName}
-          />
-        }
+      <div
+        className={classes.mainContainer}
+        style={{ backgroundColor: selectedTheme.bodyColour, fontFamily: selectedTheme.font }}>
+        {themeLoaded && <TeamContainer theme={selectedTheme} teamName={teamName} />}
       </div>
     </>
   );
