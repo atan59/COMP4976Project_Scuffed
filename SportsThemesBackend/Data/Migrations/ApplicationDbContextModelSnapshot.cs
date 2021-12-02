@@ -403,7 +403,7 @@ namespace SportsThemesBackend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FontSize")
+                    b.Property<int>("HeaderFontSize")
                         .HasColumnType("int");
 
                     b.Property<int>("LinkOpacity")
@@ -426,6 +426,9 @@ namespace SportsThemesBackend.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TextFontSize")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Themes");
@@ -438,12 +441,13 @@ namespace SportsThemesBackend.Data.Migrations
                             ButtonBackgroundColour = "#6495ED",
                             ButtonTextColour = "#5F9EA0",
                             Font = "Helvetica",
-                            FontSize = 2,
+                            HeaderFontSize = 2,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
                             Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                             Name = "Test Theme 1",
-                            TextColour = "#000000"
+                            TextColour = "#000000",
+                            TextFontSize = 2
                         },
                         new
                         {
@@ -452,12 +456,13 @@ namespace SportsThemesBackend.Data.Migrations
                             ButtonBackgroundColour = "#6495ED",
                             ButtonTextColour = "#5F9EA0",
                             Font = "Helvetica",
-                            FontSize = 2,
+                            HeaderFontSize = 2,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
                             Logo = "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930",
                             Name = "Test Theme 2",
-                            TextColour = "#000000"
+                            TextColour = "#000000",
+                            TextFontSize = 2
                         });
                 });
 

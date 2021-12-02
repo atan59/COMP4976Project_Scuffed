@@ -37,7 +37,10 @@
                 @Html.DisplayNameFor(model => model.Font)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FontSize)
+                @Html.DisplayNameFor(model => model.HeaderFontSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TextFontSize)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Logo)
@@ -74,7 +77,10 @@
                     @Html.DisplayFor(modelItem => item.Font)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FontSize)
+                    @Html.DisplayFor(modelItem => item.HeaderFontSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextFontSize)
                 </td>
                 <td>
                     <img style="width: 100px" src="@Url.Content(item.Logo)">
