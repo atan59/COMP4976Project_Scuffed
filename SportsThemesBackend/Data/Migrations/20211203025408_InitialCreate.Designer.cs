@@ -10,7 +10,7 @@ using SportsThemesBackend.Data;
 namespace SportsThemesBackend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211203000555_InitialCreate")]
+    [Migration("20211203025408_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,6 +256,16 @@ namespace SportsThemesBackend.Data.Migrations
                         {
                             CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
                             CoachName = "Barney Rubble"
+                        },
+                        new
+                        {
+                            CoachId = "10101010-0000-0000-0000-000000000001",
+                            CoachName = "Fred Flintstone"
+                        },
+                        new
+                        {
+                            CoachId = "10101010-0000-0000-0000-000000000002",
+                            CoachName = "John Smith"
                         });
                 });
 
@@ -409,7 +419,7 @@ namespace SportsThemesBackend.Data.Migrations
                             TeamName = "Test Team 1",
                             City = "Vancouver",
                             CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
-                            ThemeId = new Guid("00000000-0000-0000-0000-000000000000")
+                            ThemeId = new Guid("00000000-0000-0000-0000-000000000001")
                         });
                 });
 

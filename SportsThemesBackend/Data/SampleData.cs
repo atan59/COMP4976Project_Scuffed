@@ -53,6 +53,7 @@ namespace SportsThemesBackend.Data
                     TeamName = "Test Team 1",
                     City = "Vancouver",
                     CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
+                    ThemeId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                 },
             };
 
@@ -66,6 +67,14 @@ namespace SportsThemesBackend.Data
                 new Coach() {
                     CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
                     CoachName = "Barney Rubble",
+                },
+                new Coach() {
+                    CoachId = "10101010-0000-0000-0000-000000000001",
+                    CoachName = "Fred Flintstone",
+                },
+                new Coach() {
+                    CoachId = "10101010-0000-0000-0000-000000000002",
+                    CoachName = "John Smith",
                 },
             };
 

@@ -237,20 +237,25 @@ namespace SportsThemesBackend.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Coaches",
                 columns: new[] { "CoachId", "CoachName", "TeamName" },
-                values: new object[] { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble", null });
+                values: new object[,]
+                {
+                    { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble", null },
+                    { "10101010-0000-0000-0000-000000000001", "Fred Flintstone", null },
+                    { "10101010-0000-0000-0000-000000000002", "John Smith", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Players",
                 columns: new[] { "PlayerId", "PlayerName", "Position", "TeamName" },
                 values: new object[,]
                 {
-                    { "a29e2769-5e6b-4312-bda3-7f861490a85c", "Bambam Rubble", "Test Position 1", "Test Team 1" },
-                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" },
-                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953f", "John Smith", "Small Forward", null },
-                    { "e53b645b-6c9f-414f-9c37-b8f33a0e953r", "Mary Johnson", "Center", null },
+                    { "e53b435b-6c9f-4j4f-9c37-b8g33f0e953r", "Jake Tim", "Shooting Guard", null },
                     { "e53b635b-6c9f-414f-9c37-b8f33f0e953r", "Bob Ross", "Point Guard", null },
+                    { "e53b645b-6c9f-414f-9c37-b8f33a0e953r", "Mary Johnson", "Center", null },
                     { "e53b635b-6c9f-4g4f-9c37-b8g33f0e953r", "Garmin Altec", "Power Forward", null },
-                    { "e53b435b-6c9f-4j4f-9c37-b8g33f0e953r", "Jake Tim", "Shooting Guard", null }
+                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953d", "Pebbles Flintstone", "Test Position 2", "Test Team 1" },
+                    { "a29e2769-5e6b-4312-bda3-7f861490a85c", "Bambam Rubble", "Test Position 1", "Test Team 1" },
+                    { "e53b635b-6c9f-414f-9c37-b8f33a0e953f", "John Smith", "Small Forward", null }
                 });
 
             migrationBuilder.InsertData(
@@ -267,7 +272,7 @@ namespace SportsThemesBackend.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Teams",
                 columns: new[] { "TeamName", "City", "CoachId", "ThemeId" },
-                values: new object[] { "Test Team 1", "Vancouver", "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", new Guid("00000000-0000-0000-0000-000000000000") });
+                values: new object[] { "Test Team 1", "Vancouver", "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", new Guid("00000000-0000-0000-0000-000000000001") });
 
             migrationBuilder.InsertData(
                 table: "Themes",
