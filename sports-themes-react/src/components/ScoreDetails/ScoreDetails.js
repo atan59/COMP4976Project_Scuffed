@@ -48,8 +48,8 @@ const ScoreDetails = (props) => {
         const newErrors = {};
 
         if (!gameName) newErrors.gameName = "You must enter a game name";
-        if (playerScore && !/^[0-9]*$/.test(playerScore)) newErrors.playerScore = "A player's score must be an integer";
-        if (!playerScore) newErrors.playerScore = "A player's score cannot be blank";
+        if (playerScore && !/^[0-9]*$/.test(playerScore)) newErrors.playerScore = "You must enter a valid player score (a number)";
+        if (!playerScore) newErrors.playerScore = "You must enter a player score";
 
         return newErrors;
     }
@@ -63,7 +63,9 @@ const ScoreDetails = (props) => {
             return;
         }
 
-        postPlayerScore(props.player.playerId, form, setAddState)
+        await postPlayerScore(props.player.playerId, form, setAddState)
+        await getPlayerScoresByID(props.player.playerId, setPlayerScores)
+        handleClose()
     };
 
     const handleClose = () => setAddState(false)
@@ -92,13 +94,13 @@ const ScoreDetails = (props) => {
             </div>
             <Modal show={addState} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Score for {props.player.playerName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form className={classes.addForm} onSubmit={handleAdd}>
                         <div className={classes.inputElements}>
                             <Form.Group>
-                                <Form.Label><i class="fas fa-envelope"></i> Game Name</Form.Label>
+                                <Form.Label><i class="fas fa-trophy"></i> Game Name</Form.Label>
                                 <Form.Control
                                     isInvalid={errors.gameName}
                                     type="text"
@@ -112,7 +114,7 @@ const ScoreDetails = (props) => {
                         </div>
                         <div className={classes.inputElements}>
                             <Form.Group>
-                                <Form.Label><i class="fas fa-lock"></i> Player Score</Form.Label>
+                                <Form.Label><i class="fas fa-list-ol"></i> Player Score</Form.Label>
                                 <Form.Control
                                     isInvalid={errors.playerScore}
                                     type="text"
@@ -124,14 +126,13 @@ const ScoreDetails = (props) => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </div>
-                        <Button variant='dark' type="submit">Save Score</Button>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="dark" onClick={handleAdd}>
                         Save Score
                     </Button>
                 </Modal.Footer>
