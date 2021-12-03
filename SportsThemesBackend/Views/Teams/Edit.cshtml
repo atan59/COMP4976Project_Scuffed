@@ -13,6 +13,14 @@
     <div class="col-md-8">
         <h4>Editing <i>@Model.TeamName</i></h4>
         <hr />
+         @if (ViewBag.ShowWarning) {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Oh no!</strong><br>@ViewBag.ShowWarningMessage
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        }
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TeamName" />

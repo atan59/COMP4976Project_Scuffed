@@ -105,6 +105,8 @@ namespace SportsThemesBackend.Controllers
 
             ViewBag.Coaches = coaches;
             ViewBag.CoachCount = coaches.Count();
+            ViewBag.ShowWarning = false;
+            ViewBag.ShowWarningMessage = $"";
             ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
             return View();
         }
@@ -116,6 +118,20 @@ namespace SportsThemesBackend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TeamName, City, CoachId, ThemeId")] Team team)
         {
+            var currentTeams = await _context.Teams
+                .ToListAsync();
+
+            foreach (var currentTeam in currentTeams)
+            {
+                if (currentTeam.TeamName == team.TeamName)
+                {
+                    ViewBag.ShowWarning = true;
+                    ViewBag.ShowWarningMessage = $"This team name has already been used! Please enter a different team name.";
+
+                    return View(team);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 var coach = await _context.Coaches
@@ -129,6 +145,10 @@ namespace SportsThemesBackend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.ShowWarning = false;
+            ViewBag.ShowWarningMessage = $"";
+
             return View(team);
         }
 
@@ -150,6 +170,8 @@ namespace SportsThemesBackend.Controllers
 
             ViewBag.Coaches = new SelectList(_context.Coaches.Where(c => c.TeamName == null || c.CoachId == team.CoachId), "CoachId", "CoachName");
             ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
+            ViewBag.ShowWarning = false;
+            ViewBag.ShowWarningMessage = $"";
 
             return View(team);
         }
@@ -164,6 +186,20 @@ namespace SportsThemesBackend.Controllers
             if (id != team.TeamName)
             {
                 return NotFound();
+            }
+
+            var currentTeams = await _context.Teams
+                .ToListAsync();
+
+            foreach (var currentTeam in currentTeams)
+            {
+                if (currentTeam.TeamName == team.TeamName)
+                {
+                    ViewBag.ShowWarning = true;
+                    ViewBag.ShowWarningMessage = $"This team name has already been used! Please enter a different team name.";
+
+                    return View(team);
+                }
             }
 
             if (ModelState.IsValid)
