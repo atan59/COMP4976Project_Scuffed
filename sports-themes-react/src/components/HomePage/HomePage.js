@@ -63,7 +63,7 @@ const HomePage = () => {
       <div
         className={classes.mainContainer}
         style={{ backgroundColor: selectedTheme.bodyColour, fontFamily: selectedTheme.font }}>
-        {!themeLoaded ? (
+        {!teamName ? (
           <>
             <div className={classes.defaultMessage}>
               {!loading ? <h1>You are currently not assigned to a team</h1> :
