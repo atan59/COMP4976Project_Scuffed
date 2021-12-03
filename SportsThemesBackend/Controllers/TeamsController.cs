@@ -119,7 +119,6 @@ namespace SportsThemesBackend.Controllers
         public async Task<IActionResult> Create([Bind("TeamName, City, CoachId, ThemeId")] Team team)
         {
             var currentTeams = await _context.Teams
-                .Where(t => t.TeamName != team.TeamName)
                 .ToListAsync();
 
             foreach (var currentTeam in currentTeams)
