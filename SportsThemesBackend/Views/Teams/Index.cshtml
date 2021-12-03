@@ -38,10 +38,10 @@
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CoachId)
+                    @ViewBag.CoachNames[item.CoachId]
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ThemeId)
+                    @ViewBag.ThemeNames[item.ThemeId]
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TeamName">Edit</a> |

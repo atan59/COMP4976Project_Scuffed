@@ -25,14 +25,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="CoachId" class="control-label"></label>
-                <select asp-for="CoachId" class ="form-control" asp-items="ViewBag.Coaches">
+                <select asp-for="CoachId" class="form-control" asp-items="ViewBag.Coaches">
                     <option value='' selected>Select a Coach</option>
                 </select>
                 <span asp-validation-for="CoachId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ThemeId" class="control-label"></label>
-                <select asp-for="ThemeId" class ="form-control" asp-items="ViewBag.Themes">
+                <select asp-for="ThemeId" class="form-control" asp-items="ViewBag.Themes">
                     <option value='' selected>Select a Theme</option>
                 </select>
                 <span asp-validation-for="ThemeId" class="text-danger"></span>
@@ -49,5 +49,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
