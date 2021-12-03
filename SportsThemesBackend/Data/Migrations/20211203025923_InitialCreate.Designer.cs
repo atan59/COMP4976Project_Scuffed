@@ -10,7 +10,7 @@ using SportsThemesBackend.Data;
 namespace SportsThemesBackend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211203025408_InitialCreate")]
+    [Migration("20211203025923_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -255,7 +255,8 @@ namespace SportsThemesBackend.Data.Migrations
                         new
                         {
                             CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
-                            CoachName = "Barney Rubble"
+                            CoachName = "Barney Rubble",
+                            TeamName = "Test Team 1"
                         },
                         new
                         {

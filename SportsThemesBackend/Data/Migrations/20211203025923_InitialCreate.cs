@@ -239,7 +239,7 @@ namespace SportsThemesBackend.Data.Migrations
                 columns: new[] { "CoachId", "CoachName", "TeamName" },
                 values: new object[,]
                 {
-                    { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble", null },
+                    { "c3ec054e-4d44-4517-8d8e-19edfbde3f9a", "Barney Rubble", "Test Team 1" },
                     { "10101010-0000-0000-0000-000000000001", "Fred Flintstone", null },
                     { "10101010-0000-0000-0000-000000000002", "John Smith", null }
                 });

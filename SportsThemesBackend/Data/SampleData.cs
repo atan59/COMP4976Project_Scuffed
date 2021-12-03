@@ -67,6 +67,7 @@ namespace SportsThemesBackend.Data
                 new Coach() {
                     CoachId = "c3ec054e-4d44-4517-8d8e-19edfbde3f9a",
                     CoachName = "Barney Rubble",
+                    TeamName = "Test Team 1",
                 },
                 new Coach() {
                     CoachId = "10101010-0000-0000-0000-000000000001",
