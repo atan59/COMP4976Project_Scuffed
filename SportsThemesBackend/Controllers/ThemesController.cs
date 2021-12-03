@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportsThemesBackend.Data;
 using SportsThemesBackend.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,12 +45,35 @@ namespace SportsThemesBackend.Controllers
                 return NotFound();
             }
 
+            ViewBag.LogoURL = theme.Logo;
+
             return View(theme);
         }
 
         // GET: Themes/Create
         public IActionResult Create()
         {
+            var fonts = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Arial", Value = "Arial"},
+                new SelectListItem { Text = "Bookman", Value = "Bookman"},
+                new SelectListItem { Text = "Brush Script MT", Value = "Brush Script MT"},
+                new SelectListItem { Text = "Brushstroke", Value = "Brushstroke"},
+                new SelectListItem { Text = "Calibri", Value = "Calibri"},
+                new SelectListItem { Text = "Comic Sans MS", Value = "Comic Sans MS"},
+                new SelectListItem { Text = "Courier", Value = "Courier"},
+                new SelectListItem { Text = "Helvetica", Value = "Helvetica"},
+                new SelectListItem { Text = "Impact", Value = "Impact"},
+                new SelectListItem { Text = "Ink Free", Value = "Ink Free"},
+                new SelectListItem { Text = "Lucida Console", Value = "Lucida Console"},
+                new SelectListItem { Text = "Lucida Handwriting", Value = "Lucida Handwriting"},
+                new SelectListItem { Text = "Papyrus", Value = "Papyrus"},
+                new SelectListItem { Text = "Times New Roman", Value = "Times New Roman"},
+                new SelectListItem { Text = "Verdana", Value = "Verdana"},
+            }, "Value", "Text");
+
+            ViewBag.Fonts = fonts;
+
             return View();
         }
 
@@ -65,6 +90,7 @@ namespace SportsThemesBackend.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(theme);
         }
 
@@ -82,6 +108,28 @@ namespace SportsThemesBackend.Controllers
             {
                 return NotFound();
             }
+
+            var fonts = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Arial", Value = "Arial"},
+                new SelectListItem { Text = "Bookman", Value = "Bookman"},
+                new SelectListItem { Text = "Brush Script MT", Value = "Brush Script MT"},
+                new SelectListItem { Text = "Brushstroke", Value = "Brushstroke"},
+                new SelectListItem { Text = "Calibri", Value = "Calibri"},
+                new SelectListItem { Text = "Comic Sans MS", Value = "Comic Sans MS"},
+                new SelectListItem { Text = "Courier", Value = "Courier"},
+                new SelectListItem { Text = "Helvetica", Value = "Helvetica"},
+                new SelectListItem { Text = "Impact", Value = "Impact"},
+                new SelectListItem { Text = "Ink Free", Value = "Ink Free"},
+                new SelectListItem { Text = "Lucida Console", Value = "Lucida Console"},
+                new SelectListItem { Text = "Lucida Handwriting", Value = "Lucida Handwriting"},
+                new SelectListItem { Text = "Papyrus", Value = "Papyrus"},
+                new SelectListItem { Text = "Times New Roman", Value = "Times New Roman"},
+                new SelectListItem { Text = "Verdana", Value = "Verdana"},
+            }, "Value", "Text");
+
+            ViewBag.Fonts = fonts;
+
             return View(theme);
         }
 
@@ -134,6 +182,8 @@ namespace SportsThemesBackend.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.LogoURL = theme.Logo;
 
             return View(theme);
         }

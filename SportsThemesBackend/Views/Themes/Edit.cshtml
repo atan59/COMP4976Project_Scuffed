@@ -1,15 +1,18 @@
 ﻿@model SportsThemesBackend.Models.Theme
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Theme";
 }
 
-<h1>Edit</h1>
+<h1>Edit Theme</h1>
 
-<h4>Theme</h4>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h4>Editing <i>@Model.Name</i></h4>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -55,7 +58,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Font" class="control-label"></label>
-                <input asp-for="Font" class="form-control" />
+                <select asp-for="Font" class="form-control" asp-items="ViewBag.Fonts">
+                    <option value='' selected>Select a Font</option>
+                </select>
                 <span asp-validation-for="Font" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -74,16 +79,21 @@
                 <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input class="btn btn-success" type="submit" value="Save Theme" />
             </div>
         </form>
     </div>
+    <div class="col-md-2"></div>
 </div>
 
+<hr />
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Index">Back to List of Themes</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

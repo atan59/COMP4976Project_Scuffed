@@ -1,15 +1,18 @@
 ﻿@model SportsThemesBackend.Models.Theme
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Theme";
 }
 
-<h1>Create</h1>
+<h1>Create New Theme</h1>
 
-<h4>Theme</h4>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h4>New Theme</h4>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -54,7 +57,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Font" class="control-label"></label>
-                <input asp-for="Font" class="form-control" />
+                <select asp-for="Font" class ="form-control" asp-items="ViewBag.Fonts">
+                    <option value='' selected>Select a Font</option>
+                </select>
                 <span asp-validation-for="Font" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -73,14 +78,17 @@
                 <span asp-validation-for="Logo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input class="btn btn-success" type="submit" value="Create New Theme" />
             </div>
         </form>
     </div>
+    <div class="col-md-2"></div>
 </div>
 
+<hr />
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Index">Back to List of Themes</a>
 </div>
 
 @section Scripts {

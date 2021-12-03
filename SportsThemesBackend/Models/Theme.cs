@@ -56,6 +56,7 @@ namespace SportsThemesBackend.Models
         [Required]
         [DefaultValue(50)]
         [Display(Name = "Link Opacity")]
+        [Range(0, 100, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int LinkOpacity { get; set; }
 
         [Required]
