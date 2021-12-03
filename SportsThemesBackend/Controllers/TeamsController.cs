@@ -27,6 +27,10 @@ namespace SportsThemesBackend.Controllers
             var applicationDbContext = await _context.Teams
                 .ToListAsync();
 
+            var coachesNoTeam = await _context.Coaches
+                .Where(c => c.TeamName == null)
+                .ToListAsync();
+
             var coachIds = new List<string>();
             var themeIds = new List<Guid>();
 
@@ -59,6 +63,7 @@ namespace SportsThemesBackend.Controllers
 
             ViewBag.CoachNames = coachNames;
             ViewBag.ThemeNames = themeNames;
+            ViewBag.NumOfCoaches = coachesNoTeam.Count();
 
             return View(applicationDbContext);
         }
