@@ -29,14 +29,12 @@ const ScoreCard = (props) => {
             <div className={classes.scoreInfo}>
                 {editState ? (
                     <>
-                        <Form.Label><i class="fas fa-trophy">&nbsp;&nbsp;&nbsp;</i></Form.Label>
                         <Form.Control
                             type="text"
                             value={gameName}
                             onChange={e => setGameName(e.target.value)}
                         />
                         &nbsp;
-                        <Form.Label><i class="fas fa-list">&nbsp;&nbsp;&nbsp;</i></Form.Label>
                         <Form.Control
                             type="number"
                             value={playerScore}
