@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { getPlayerScoresByID, postPlayerScore } from '../ApiActions/ApiActions';
 import ScoreCard from '../ScoreCard/ScoreCard';
@@ -11,6 +11,7 @@ const ScoreDetails = (props) => {
     const [headerFontSize, setHeaderFontSize] = useState('');
     const [textFontSize, setTextFontSize] = useState('');
     const [addState, setAddState] = useState(false);
+    const scoreListRef = useRef(null);
 
     useEffect(() => {
         setForm({
@@ -31,10 +32,22 @@ const ScoreDetails = (props) => {
         setTextFontSize(textFontArr[props.theme.textFontSize])
     }, [props])
 
-    const addPlayerScore = async (e, player, form) => {
-        e.preventDefault();
-        await postPlayerScore(player.playerId, form)
-        await getPlayerScoresByID(player.playerId, setPlayerScores)
+    useEffect(() => {
+        fixBorder()
+    }, [playerScores])
+
+    const fixBorder = () => {
+        const scoreList = scoreListRef.current;
+        const hasVerticalScrollbar = scoreList.scrollHeight > scoreList.clientHeight
+        const children = scoreList.childNodes;
+
+        for (let i = 0; i < children.length; i++) {
+            children[i].style.borderBottom = '3px solid black';
+        }
+
+        if (hasVerticalScrollbar) {
+            scoreList.lastChild.style.borderBottom = 'none';
+        }
     }
 
     const setField = (name, value) => {
@@ -65,6 +78,7 @@ const ScoreDetails = (props) => {
 
         await postPlayerScore(props.player.playerId, form, setAddState)
         await getPlayerScoresByID(props.player.playerId, setPlayerScores)
+        setForm({ 'gameName': '', 'playerScore': '' })
         handleClose()
     };
 
@@ -76,7 +90,7 @@ const ScoreDetails = (props) => {
                 <div className={classes.scoreHeader}
                     style={{ fontSize: headerFontSize }}>
                     <p>{props.player.playerName}'s Scores</p>
-                    <Button
+                    {props.role === 'Coach' && <Button
                         onClick={() => setAddState(true)}
                         style={{
                             backgroundColor: props.theme.buttonBackgroundColour,
@@ -84,11 +98,11 @@ const ScoreDetails = (props) => {
                             fontSize: textFontSize
                         }}>
                         Add Score
-                    </Button>
+                    </Button>}
                 </div>
-                <div className={classes.scoreListContainer}>
+                <div className={classes.scoreListContainer} ref={scoreListRef}>
                     {playerScores.map(score => {
-                        return <ScoreCard key={score.scoreId} theme={props.theme} score={score} playerID={props.player.playerId} />
+                        return <ScoreCard key={score.scoreId} theme={props.theme} score={score} playerID={props.player.playerId} role={props.role}/>
                     })}
                 </div>
             </div>

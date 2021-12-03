@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 40vh;
     width: 100%;
+    border: 3px solid black;
 }
 
 .scoreHeader {
@@ -28,10 +29,6 @@
     flex-direction: column;
     height: 100%;
     overflow-y: auto;
-}
-
-.scoreListContainer div:last-of-type {
-    border-bottom: none;
 }
 
 .inputElements input {

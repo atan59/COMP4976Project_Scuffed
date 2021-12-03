@@ -31,7 +31,7 @@ export const getTeamByCoach = (uid) => {
 
 export const getTeamNameByPlayer = (uid) => {
     return axios.get(`https://localhost:5001/api/players/${uid}`).then(res => {
-        return res.teamName
+        return res.data.teamName
     }).catch(err => console.log(err))
 }
 
@@ -44,7 +44,8 @@ export const getPlayerRoster = (teamName, setPlayerRoster) => {
 
 export const getThemeIDByTeamName = (teamName, setThemeID) => {
     return axios.get(`https://localhost:5001/api/teams/${teamName}`).then(res => {
-        setThemeID(res.themeId)
+        console.log(res);
+        setThemeID(res.data.themeId)
     }).catch(err => console.log(err))
 }
 

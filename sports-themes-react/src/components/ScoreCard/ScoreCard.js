@@ -29,11 +29,13 @@ const ScoreCard = (props) => {
             <div className={classes.scoreInfo}>
                 {editState ? (
                     <>
+                        <Form.Label><i class="fas fa-trophy">&nbsp;&nbsp;&nbsp;</i></Form.Label>
                         <Form.Control
                             type="text"
                             value={gameName}
                             onChange={e => setGameName(e.target.value)}
                         />
+                        <Form.Label><i class="fas fa-trophy">&nbsp;&nbsp;&nbsp;</i></Form.Label>
                         <Form.Control
                             type="number"
                             value={playerScore}
@@ -42,18 +44,18 @@ const ScoreCard = (props) => {
                     </>
                 ) : (
                     <>
-                        <p>{gameName}</p>
-                        <p>{playerScore}</p>
+                        <p><i class="fas fa-trophy">&nbsp;&nbsp;&nbsp;</i> {gameName}</p>
+                        <p><i class="fas fa-list-ol"></i>&nbsp;&nbsp;&nbsp; {playerScore}</p>
                     </>
                 )}
             </div>
-            <div className={classes.flexEnd}>
+            {props.role === 'Coach' && <div className={classes.flexEnd}>
                 <Button
                 onClick={() => handleEdit()}
                     style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}>
                     {editState ? <>Save Score</> : <>Edit Score</>}
                 </Button>
-            </div>
+            </div>}
         </div>
     )
 }

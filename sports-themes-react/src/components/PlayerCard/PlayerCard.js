@@ -6,7 +6,7 @@ const PlayerCard = (props) => {
     return (
         <div className={classes.playerCard} style={{ color: props.theme.textColour }}>
             <div className={classes.playerInfo}>
-                <p>{props.player.playerName}</p>
+                <p><i class="fas fa-user"></i>&nbsp;&nbsp;&nbsp; {props.player.playerName}</p>
                 <p>{props.player.position}</p>
             </div>
             <div className={classes.flexEnd}>
