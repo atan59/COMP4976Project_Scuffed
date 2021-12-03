@@ -3,6 +3,40 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Team Scuffed Backend</h1>
+
+    <hr />
+
+    <p>On this site, Admin users can create, edit, view details, and delete Themes and Teams.</p>
+
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            Themes Information
+        </dt>
+        <dd class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p>You currently have <strong>@ViewBag.NumOfThemes theme/s</strong>.</p>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-primary" asp-controller="Themes" asp-action="Index">Go to List of Themes</a>
+                </div>
+            </div>
+        </dd>
+        <dt class="col-sm-2">
+            Teams Information
+        </dt>
+        <dd class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p>You currently have <strong>@ViewBag.NumOfTeams team/s</strong>.</p>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-primary" asp-controller="Teams" asp-action="Index">Go to List of Teams</a>
+                </div>
+            </div>
+        </dd>
+    </dl>
 </div>
