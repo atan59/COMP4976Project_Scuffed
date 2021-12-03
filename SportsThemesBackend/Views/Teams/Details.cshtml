@@ -1,42 +1,51 @@
 ﻿@model SportsThemesBackend.Models.Team
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Team Details";
 }
 
-<h1>Details</h1>
+<h1>Team Details</h1>
+
+<hr />
 
 <div>
-    <h4>Team</h4>
+    <h4><i>@Model.TeamName</i> Details</h4>
+
     <hr />
+
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TeamName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TeamName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.City)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.City)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CoachId)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoachId)
+        <dd class="col-sm-10">
+            @ViewBag.CoachName
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ThemeId)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThemeId)
+        <dd class="col-sm-10">
+            @ViewBag.ThemeName
+        </dd>
+        <dt class="col-sm-2"></dt>
+        <dd>
+            <a class="btn btn-info" asp-controller="Themes" asp-action="Details" asp-route-id="@Model.ThemeId">View <i>@ViewBag.ThemeName</i> Details</a>
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.TeamName">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<hr />
+
+<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.TeamName">Edit <i>@Model.TeamName</i></a>
+<a class="btn btn-dark" asp-action="Index">Back to List of Teams</a>

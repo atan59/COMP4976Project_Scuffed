@@ -7,11 +7,6 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-.navbarLogo {
-    width: auto;
-    height: 50px;
-}
-
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;

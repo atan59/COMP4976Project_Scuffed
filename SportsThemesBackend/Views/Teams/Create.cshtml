@@ -1,19 +1,22 @@
 ﻿@model SportsThemesBackend.Models.Team
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Team";
 }
 
-<h1>Create</h1>
+<h1>Create New Team</h1>
 
-<h4>Team</h4>
 <hr />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h4>New Team</h4>
+        <hr />
         @if (ViewBag.CoachCount == 0)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <strong>Oh no!</strong> There are no more coaches without teams. You cannot create any more new teams.
+              <strong>Oh no!</strong><br>There are no more <strong>Coaches</strong> without teams. You cannot create any more new teams.
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -48,20 +51,23 @@
             @if (ViewBag.CoachCount == 0)
             {
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" disabled />
+                    <input class="btn btn-success" type="submit" value="Create New Team" disabled />
                 </div>
             } else
             {
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input class="btn btn-success" type="submit" value="Create New Team" />
                 </div>
             }
         </form>
     </div>
+    <div class="col-md-2"></div>
 </div>
 
+<hr />
+
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Index">Back to List of Teams</a>
 </div>
 
 @section Scripts {

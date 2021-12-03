@@ -79,6 +79,17 @@ namespace SportsThemesBackend.Controllers
                 return NotFound();
             }
 
+            var coach = await _context.Coaches
+                    .Where(c => c.CoachId == team.CoachId)
+                    .FirstOrDefaultAsync();
+
+            var theme = await _context.Themes
+                .Where(c => c.Id == team.ThemeId)
+                .FirstOrDefaultAsync();
+
+            ViewBag.CoachName = coach.CoachName;
+            ViewBag.ThemeName = theme.Name;
+
             return View(team);
         }
 
@@ -208,6 +219,17 @@ namespace SportsThemesBackend.Controllers
             {
                 return NotFound();
             }
+
+            var coach = await _context.Coaches
+                    .Where(c => c.CoachId == team.CoachId)
+                    .FirstOrDefaultAsync();
+
+            var theme = await _context.Themes
+                .Where(c => c.Id == team.ThemeId)
+                .FirstOrDefaultAsync();
+
+            ViewBag.CoachName = coach.CoachName;
+            ViewBag.ThemeName = theme.Name;
 
             return View(team);
         }
