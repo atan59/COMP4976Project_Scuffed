@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SportsThemesBackend.Data;
 using SportsThemesBackend.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,9 +24,43 @@ namespace SportsThemesBackend.Controllers
         // GET: Teams
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Teams;
+            var applicationDbContext = await _context.Teams
+                .ToListAsync();
 
-            return View(await applicationDbContext.ToListAsync());
+            var coachIds = new List<string>();
+            var themeIds = new List<Guid>();
+
+            foreach (var team in applicationDbContext)
+            {
+                coachIds.Add(team.CoachId);
+                themeIds.Add(team.ThemeId);
+            }
+
+            var coachNames = new Dictionary<string, string>();
+            var themeNames = new Dictionary<Guid, string>();
+
+            for (var i = 0; i < coachIds.Count(); i++)
+            {
+                var coach = await _context.Coaches
+                    .Where(c => c.CoachId == coachIds[i])
+                    .FirstOrDefaultAsync();
+
+                var theme = await _context.Themes
+                    .Where(c => c.Id == themeIds[i])
+                    .FirstOrDefaultAsync();
+
+                coachNames.Add(coachIds[i], coach.CoachName);
+
+                if (!themeNames.ContainsKey(themeIds[i]))
+                {
+                    themeNames.Add(themeIds[i], theme.Name);
+                }
+            }
+
+            ViewBag.CoachNames = coachNames;
+            ViewBag.ThemeNames = themeNames;
+
+            return View(applicationDbContext);
         }
 
         // GET: Teams/Details/5
@@ -50,8 +85,11 @@ namespace SportsThemesBackend.Controllers
         // GET: Teams/Create
         public IActionResult Create()
         {
-            ViewData["Coaches"] = new SelectList(_context.Coaches.Where(c => c.TeamName == null), "CoachId", "CoachName");
-            ViewData["Themes"] = new SelectList(_context.Themes, "Id", "Name");
+            var coaches = new SelectList(_context.Coaches.Where(c => c.TeamName == null), "CoachId", "CoachName");
+
+            ViewBag.Coaches = coaches;
+            ViewBag.CoachCount = coaches.Count();
+            ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
             return View();
         }
 
@@ -94,8 +132,8 @@ namespace SportsThemesBackend.Controllers
                 return NotFound();
             }
 
-            ViewData["Coaches"] = new SelectList(_context.Coaches.Where(c => c.TeamName == null || c.CoachId == team.CoachId), "CoachId", "CoachName");
-            ViewData["Themes"] = new SelectList(_context.Themes, "Id", "Name");
+            ViewBag.Coaches = new SelectList(_context.Coaches.Where(c => c.TeamName == null || c.CoachId == team.CoachId), "CoachId", "CoachName");
+            ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
 
             return View(team);
         }
@@ -119,6 +157,19 @@ namespace SportsThemesBackend.Controllers
                     var coach = await _context.Coaches
                     .Where(c => c.CoachId == team.CoachId)
                     .FirstOrDefaultAsync();
+
+                    var oldCoaches = await _context.Coaches
+                        .Where(c => c.CoachId != team.CoachId && c.TeamName == team.TeamName)
+                        .ToListAsync();
+
+                    if (oldCoaches.Count() > 0)
+                    {
+                        foreach(var oldCoach in oldCoaches)
+                        {
+                            oldCoach.TeamName = null;
+                            _context.Update(oldCoach);
+                        }
+                    }
 
                     coach.TeamName = team.TeamName;
 
