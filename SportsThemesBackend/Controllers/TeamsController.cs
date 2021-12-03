@@ -125,6 +125,10 @@ namespace SportsThemesBackend.Controllers
             {
                 if (currentTeam.TeamName == team.TeamName)
                 {
+                    var coaches = new SelectList(_context.Coaches.Where(c => c.TeamName == null), "CoachId", "CoachName");
+
+                    ViewBag.Coaches = coaches;
+                    ViewBag.CoachCount = coaches.Count();
                     ViewBag.ShowWarning = true;
                     ViewBag.ShowWarningMessage = $"This team name has already been used! Please enter a different team name.";
 
@@ -197,6 +201,8 @@ namespace SportsThemesBackend.Controllers
                 {
                     ViewBag.ShowWarning = true;
                     ViewBag.ShowWarningMessage = $"This team name has already been used! Please enter a different team name.";
+                    ViewBag.Coaches = new SelectList(_context.Coaches.Where(c => c.TeamName == null || c.CoachId == team.CoachId), "CoachId", "CoachName");
+                    ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
 
                     return View(team);
                 }
