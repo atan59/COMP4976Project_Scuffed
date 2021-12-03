@@ -37,15 +37,20 @@ export const getTeamNameByPlayer = (uid) => {
 
 export const getPlayerRoster = (teamName, setPlayerRoster) => {
     return axios.get('https://localhost:5001/api/players').then(res => {
-        console.log(res.data);
         setPlayerRoster(res.data.filter(player => player.teamName === teamName))
     }).catch(err => console.log(err))
 }
 
-export const getThemeIDByTeamName = (teamName, setThemeID) => {
+export const getThemeIDAndCoachIDByTeamName = (teamName, setThemeID, setCoachID) => {
     return axios.get(`https://localhost:5001/api/teams/${teamName}`).then(res => {
-        console.log(res);
         setThemeID(res.data.themeId)
+        setCoachID(res.data.coachId)
+    }).catch(err => console.log(err))
+}
+
+export const getCoachNameByCoachID = (coachID, setCoachName) => {
+    return axios.get(`https://localhost:5001/api/coaches/${coachID}`).then(res => {
+        setCoachName(res.data.coachName)
     }).catch(err => console.log(err))
 }
 
