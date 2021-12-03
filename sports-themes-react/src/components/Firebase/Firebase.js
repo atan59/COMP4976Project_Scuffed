@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { postCoachUser, postPlayerUser } from '../ApiActions/ApiActions';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBtCTzc_UIb6v_bwt_2eY-nxifqZw8Qx80",
@@ -36,6 +37,16 @@ const registerWithEmailAndPassword = async (email, password, form) => {
             authProvider: "local",
             email
         });
+        const coachInfo = { name: form.name }
+        const playerInfo = { name: form.name, position: form.position }
+
+        if (form.role === 'Coach') {
+            await postCoachUser(user.uid, coachInfo);
+            return;
+        }
+
+        await postPlayerUser(user.uid, playerInfo);
+
     } catch (err) {
         console.error(err);
         alert(err.message);

@@ -3,7 +3,7 @@ import classes from './HomePage.module.css';
 import TeamContainer from '../TeamContainer/TeamContainer';
 import { auth, logout } from '../Firebase/Firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getFirebaseUserInfo, getTeamByCoach, getTeamNameByPlayer, getThemeByID, getThemeIDAndCoachIDByTeamName, postCoachUser, postPlayerUser, getCoachNameByCoachID } from '../ApiActions/ApiActions';
+import { getFirebaseUserInfo, getTeamByCoach, getTeamNameByPlayer, getThemeByID, getThemeIDAndCoachIDByTeamName, getCoachNameByCoachID } from '../ApiActions/ApiActions';
 import NavbarComponent from '../Navbar/NavbarComponent';
 
 
@@ -25,12 +25,6 @@ const HomePage = () => {
       setUserInfo(res);
     })
   }, [user]);
-
-  useEffect(() => {
-    if (Object.keys(userInfo).length === 0) return;
-
-    checkNewUser();
-  }, [userInfo])
 
   useEffect(() => {
     if (Object.keys(userInfo).length === 0) return;
@@ -62,21 +56,6 @@ const HomePage = () => {
 
     getThemeByID(themeID, setSelectedTheme, setThemeLoaded)
   }, [themeID]);
-
-  // 5: Render if the theme is loaded.
-  const checkNewUser = async () => {
-    const creationTime = new Date(auth.currentUser.metadata.creationTime).getTime() / 1000;
-    const loginTime = Math.round(new Date().getTime() / 1000);
-
-    // Checks if user is a new user (2 second range)
-    if (loginTime + 2 >= creationTime && loginTime - 2 <= creationTime) {
-      if (userInfo.role === 'Coach') {
-        await postCoachUser(user?.uid, userInfo);
-        return;
-      }
-      await postPlayerUser(user?.uid, userInfo);
-    }
-  }
 
   return (
     <>
