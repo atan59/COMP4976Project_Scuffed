@@ -129,6 +129,7 @@ namespace SportsThemesBackend.Controllers
 
                     ViewBag.Coaches = coaches;
                     ViewBag.CoachCount = coaches.Count();
+                    ViewBag.Themes = new SelectList(_context.Themes, "Id", "Name");
                     ViewBag.ShowWarning = true;
                     ViewBag.ShowWarningMessage = $"This team name has already been used! Please enter a different team name.";
 
