@@ -35,7 +35,8 @@ const ScoreCard = (props) => {
                             value={gameName}
                             onChange={e => setGameName(e.target.value)}
                         />
-                        <Form.Label><i class="fas fa-trophy">&nbsp;&nbsp;&nbsp;</i></Form.Label>
+                        &nbsp;
+                        <Form.Label><i class="fas fa-list">&nbsp;&nbsp;&nbsp;</i></Form.Label>
                         <Form.Control
                             type="number"
                             value={playerScore}
