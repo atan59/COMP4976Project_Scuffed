@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SportsThemesBackend.Data.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class IniCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

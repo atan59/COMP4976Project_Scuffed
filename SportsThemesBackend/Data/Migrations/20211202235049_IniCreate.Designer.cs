@@ -10,8 +10,8 @@ using SportsThemesBackend.Data;
 namespace SportsThemesBackend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211202232640_InitCreate")]
-    partial class InitCreate
+    [Migration("20211202235049_IniCreate")]
+    partial class IniCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
