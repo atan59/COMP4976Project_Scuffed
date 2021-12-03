@@ -78,22 +78,42 @@ const TeamContainer = (props) => {
                 <img src={props.theme.logo} alt="" className={classes.logo} />
                 <div className={classes.teamName} style={{ fontSize: headerFontSize, color: props.theme.textColour }}>{props.teamName} Player Statistics</div>
             </div>
-            <div className={classes.homeContainer}>
-                <div className={classes.playerListContainer}>
-                    {playerRoster.map(player => {
-                        return <PlayerCard key={player.playerId} theme={props.theme} player={player} handleClick={setPlayerDetails} />
-                    })}
-                </div>
-                {<div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
-                    {playerDetails !== null && <ScoreDetails player={playerDetails} theme={props.theme} />}
-                </div>}
+            <div className={classes.coachName} style={{ fontSize: headerFontSize, color: props.theme.textColour }}>
+                Coached by {props.name}
+            </div>
+            <div className={classes.homeContainer}
+                style={{ background: props.theme.listBackgroundColour }}>
+                {playerRoster.length === 0 ? (
+                    <div className={classes.defaultMessage}>
+                        <p style={{ fontSize: headerFontSize }}>
+                            There are currently no players on your team
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        <div className={classes.playerListContainer}>
+                            {playerRoster.map(player => {
+                                return <PlayerCard key={player.playerId} theme={props.theme} player={player} handleClick={setPlayerDetails} />
+                            })}
+                        </div>
+                        <div className={classes.playerScoreContainer} style={{ color: props.theme.textColour }}>
+                            {playerDetails === null && playerRoster.length !== 0 &&
+                                <div className={classes.defaultMessage}>
+                                    <p style={{ fontSize: headerFontSize }}>
+                                        Click on the "View Scores" button to see a player's scores
+                                    </p>
+                                </div>}
+                            {playerDetails !== null && <ScoreDetails player={playerDetails} theme={props.theme} role={props.role} />}
+                        </div>
+                    </>
+                )}
             </div>
             <div className={classes.addPlayerContainer} style={{ color: props.theme.textColour }}>
-                <Button
+                {props.role === 'Coach' && <Button
                     style={{ backgroundColor: props.theme.buttonBackgroundColour, color: props.theme.buttonTextColour }}
                     onClick={() => showDropdown()}>
-                    Add Player
-                </Button>
+                    <i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp; Add Player
+                </Button>}
                 <Form.Group className={classes.addPlayerSelect} ref={dropdownRef}>
                     <Form.Control
                         as="select"

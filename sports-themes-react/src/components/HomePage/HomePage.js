@@ -65,10 +65,11 @@ const HomePage = () => {
   const [theme, setTheme] = useState(themes.seaWave)
   const [themeLoaded, setThemeLoaded] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState({});
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [userInfo, setUserInfo] = useState({});
   const [teamName, setTeamName] = useState('');
   const [themeID, setThemeID] = useState('');
+  const [loading, setLoading] = useState(true);
 
   console.log(selectedTheme);
 
@@ -93,6 +94,7 @@ const HomePage = () => {
       getTeamByCoach(user.uid).then(res => {
         setTeamName(res?.teamName);
         setThemeID(res?.themeId);
+        setLoading(false);
       })
       return;
     }
@@ -135,7 +137,16 @@ const HomePage = () => {
       <div
         className={classes.mainContainer}
         style={{ backgroundColor: selectedTheme.bodyColour, fontFamily: selectedTheme.font }}>
-        {themeLoaded && <TeamContainer theme={selectedTheme} teamName={teamName} />}
+        {!themeLoaded ? (
+          <>
+            <div className={classes.defaultMessage}>
+              {!loading ? <h1>You are currently not assigned to a team</h1> :
+                <h1>Loading...</h1>}
+            </div>
+          </>
+        ) : (
+          <TeamContainer theme={selectedTheme} teamName={teamName} role={userInfo.role} name={userInfo.name}/>
+        )}
       </div>
     </>
   );
