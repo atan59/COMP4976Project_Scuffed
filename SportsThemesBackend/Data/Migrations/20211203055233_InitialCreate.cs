@@ -279,8 +279,8 @@ namespace SportsThemesBackend.Data.Migrations
                 columns: new[] { "Id", "BodyColour", "ButtonBackgroundColour", "ButtonTextColour", "Font", "HeaderFontSize", "LinkOpacity", "LinkTextColour", "ListBackgroundColour", "Logo", "Name", "TextColour", "TextFontSize" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000", 2 },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), "#F0F8FF", "#6495ED", "#5F9EA0", "Helvetica", 2, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000", 2 }
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "#8740ce", "#1e6f71", "#ffffff", "Comic Sans MS", 1, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 1", "#000000", 2 },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "#3e4d93", "#324467", "#ffffff", "Verdana", 1, 50, "#DC143C", "#ffffff", "https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/07/attachment_80660538-e1531899559548.jpg?auto=format&q=60&fit=max&w=930", "Test Theme 2", "#000000", 2 }
                 });
 
             migrationBuilder.CreateIndex(

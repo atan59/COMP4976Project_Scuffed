@@ -10,8 +10,8 @@ using SportsThemesBackend.Data;
 namespace SportsThemesBackend.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211203033239_LinkOpacityLimit")]
-    partial class LinkOpacityLimit
+    [Migration("20211203055233_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -484,11 +484,11 @@ namespace SportsThemesBackend.Data.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            BodyColour = "#F0F8FF",
-                            ButtonBackgroundColour = "#6495ED",
-                            ButtonTextColour = "#5F9EA0",
-                            Font = "Helvetica",
-                            HeaderFontSize = 2,
+                            BodyColour = "#8740ce",
+                            ButtonBackgroundColour = "#1e6f71",
+                            ButtonTextColour = "#ffffff",
+                            Font = "Comic Sans MS",
+                            HeaderFontSize = 1,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
                             ListBackgroundColour = "#ffffff",
@@ -500,11 +500,11 @@ namespace SportsThemesBackend.Data.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            BodyColour = "#F0F8FF",
-                            ButtonBackgroundColour = "#6495ED",
-                            ButtonTextColour = "#5F9EA0",
-                            Font = "Helvetica",
-                            HeaderFontSize = 2,
+                            BodyColour = "#3e4d93",
+                            ButtonBackgroundColour = "#324467",
+                            ButtonTextColour = "#ffffff",
+                            Font = "Verdana",
+                            HeaderFontSize = 1,
                             LinkOpacity = 50,
                             LinkTextColour = "#DC143C",
                             ListBackgroundColour = "#ffffff",
